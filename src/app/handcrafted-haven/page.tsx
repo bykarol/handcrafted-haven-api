@@ -1,5 +1,5 @@
-import ProductList from "../ui/product/productList";
-import { primaryFont, secondaryFont } from "../ui/fonts";
+import ProductList from '../ui/product/productList';
+import { primaryFont, secondaryFont } from '../ui/fonts';
 
 export default function Page() {
   return (
