@@ -18,7 +18,7 @@
 
 body {
   /* color: rgb(var(--foreground-rgb)); */
-  font-family: 'Nunito Sans', sans-serif;
+  //font-family: 'Nunito Sans', sans-serif;
 
   /* background: linear-gradient(
       to bottom,
@@ -32,4 +32,27 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.navegation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color: var(--mainTitles);
+  background-color: rgb(var(--foreground-rgb));
+}
+
+.navegation-links {
+  display: flex;
+  justify-content: center;
+}
+
+.navegation-links > * {
+  margin: 0 10px;
+  font-family: inherit;
+}
+
+.sign {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
