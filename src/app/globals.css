@@ -3,9 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0;              /* Black */
+  --background-start-rgb: 214, 219, 220;  /* Zircon */
+  --background-end-rgb: 255, 255, 255;    /* White */
+
+  --background: #FFFFFF;                /* White          rbg(255, 255, 255)*/
+  --mainTitles: #8B4513;                /* Saddle Brown   rbg(139, 69, 19) */
+  --paragraphs: #1E1E1E;                /* Black          rbg(0, 0, 0) */
+  --golden: #DAA520;                    /* Goldenrod      rbg(218, 165, 32) */
+  --gray: #C0C0C0;                      /* Silver         rbg(192, 192, 192) */ 
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,7 +24,7 @@
 
 body {
   /* color: rgb(var(--foreground-rgb)); */
-  //font-family: 'Nunito Sans', sans-serif;
+  /* //font-family: 'Nunito Sans', sans-serif; */
 
   /* background: linear-gradient(
       to bottom,
@@ -26,6 +32,12 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
+}
+
+main {
+  margin: 2rem;
+  background-color: white;
+  color: var(--mainTitles);
 }
 
 @layer utilities {
@@ -38,7 +50,6 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   color: var(--mainTitles);
-  background-color: rgb(var(--foreground-rgb));
 }
 
 .navegation-links {

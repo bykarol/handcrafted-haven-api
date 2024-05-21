@@ -5,7 +5,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 export async function fetchAllProducts() {
   try {
-    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id;`;
+    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id LIMIT 4;`;
     // console.log(data.rows)
     return data.rows;
   } catch (error) {
@@ -13,4 +13,15 @@ export async function fetchAllProducts() {
     throw new Error('Failed to fetch products.');
   }
 
+}
+
+
+export async function fetchAllCategories() {
+  try {
+    const data = await sql<Category> `SELECT * FROM categories`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch categories.');
+  }
 }
