@@ -6,7 +6,7 @@ export default async function ProductList() {
   const products = await fetchAllProducts();
   return (
     <div>
-      <ul>
+      <ul className='flex flex-row flex-wrap justify-evenly gap-16'>
         {products.map((product) => (
           <li key={product.id}>
             <ProductCard product={product} />

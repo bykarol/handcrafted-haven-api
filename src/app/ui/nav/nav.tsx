@@ -8,10 +8,10 @@ export default function Nav() {
   return (
     <div className="py-3 px-7 navegation">
       <div>
-        <div className={` ${primaryFont.className} text-2xl text-center`}>
+        <div className={` ${primaryFont.className} text-4xl text-center`}>
           Handcrafted
         </div>
-        <div className={`${secondaryFont.className} text-2xl text-center`}>
+        <div className={`${secondaryFont.className} text-3xl text-center`}>
           Haven
         </div>
       </div>
@@ -26,7 +26,7 @@ export default function Nav() {
       <div className="sign">
         <form>
           <button>
-            <div>Logout</div>
+            <div className='text-xl p-2 m-1 rounded-xl hover:bg-golden'>Logout</div>
           </button>
         </form>
       </div>

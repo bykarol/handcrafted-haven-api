@@ -29,7 +29,7 @@ export default function NavLinks() {
       {links.map((link) => {
         return (
           <Link key={link.name} href={link.href}>
-            {<p>{link.name}</p>}
+            {<p className='text-xl p-2 m-1 rounded-xl hover:bg-golden'>{link.name}</p>}
           </Link>
         );
       })}
