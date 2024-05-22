@@ -1,8 +1,8 @@
-
 export default function Page() {
-  return (
-    <main>
-      <h1>Products Page</h1>
-    </main>
-  );
-}
+    return (
+      <main>
+        <h1>Products page</h1>
+      </main>
+    );
+  }
+  

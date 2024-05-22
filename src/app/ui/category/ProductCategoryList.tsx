@@ -21,8 +21,8 @@ export default async function ProductCategoryList( {categoryId}: {categoryId: nu
             </div>
 
 
-            <div className="flex gap-14 m-2">
-                <div className="border-r border-x-mainTitles p-10">
+            <div className="flex flex-wrap gap-14 m-2">
+                <div className="md:border-r border-x-mainTitles p-10">
 
                     {/* Order By */}
                     <h2 className="py-2 text-2xl">Order By</h2>
@@ -42,13 +42,6 @@ export default async function ProductCategoryList( {categoryId}: {categoryId: nu
                         </li>
                         ))}
                     </ul>
-
-
-
-                    {/* Shop by Artisan for category page */}
-                    <h2 className="py-2 text-2xl">Shop by Artisan</h2>
-
-
                 </div>
                 
                 
