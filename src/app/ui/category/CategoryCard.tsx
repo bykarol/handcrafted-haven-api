@@ -5,7 +5,7 @@ import Image from "next/image"
 export async function CategoryCard( {category}: {category: Category} ) {
     return (
         <>
-            <Link href={'#'}>
+            <Link href={`/handcrafted-haven/category/${category.id}`}>
                 <Image
                     src={`/${category.categoryname}.webp`}
                     alt={`Image for ${category.categoryname} category`}

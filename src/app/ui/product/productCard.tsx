@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function ProductCard({ product }: { product: Product }) {
+  
   return (
     <>
 
@@ -11,14 +12,14 @@ export default async function ProductCard({ product }: { product: Product }) {
       )}
       <Link href={`#`}>
           <Image
-              src={`/Placeholder.jpg`}
+              src={`/${product.id}.webp`}
               alt={`Image for ${product.artisan_id}`}
               width={200}
               height={200}
           />
       </Link>
 
-      <div className="p-2">
+      <div className="p-2 text-center">
         <h3 className="font-semibold py-2">{product.pname}</h3>
         <p>Price: ${product.price}</p>
         {/* <p>Category ID: {product.category_id}</p> */}

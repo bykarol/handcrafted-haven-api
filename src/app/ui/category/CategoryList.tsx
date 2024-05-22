@@ -5,15 +5,15 @@ export async function CategoryList() {
 
     const categories = await fetchAllCategories();
     
-        return (
-            <div>
-              <ul className="flex flex-row flex-wrap justify-evenly gap-28">
+    return (
+        <div>
+            <ul className="flex flex-row flex-wrap justify-evenly gap-28">
                 {categories.map((category) => (
-                  <li key={category.id}>
-                    <CategoryCard category={category} />
-                  </li>
+                    <li key={category.id}>
+                        <CategoryCard category={category}/>
+                    </li>
                 ))}
-              </ul>
-            </div>
-          );
-        };
+            </ul>
+        </div>
+    );
+};
