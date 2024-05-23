@@ -50,3 +50,23 @@ export async function fetchCategoryById(categoryId: number) {
     throw new Error('Failed to fetch categories.');
   }
 }
+
+export async function fetchAllArtisan() {
+  try {
+    const data = await sql<Artisan> `SELECT * FROM artisans`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch categories.');
+  }
+}
+
+export async function fetchArtisanById(artisanId : number) {
+  try {
+    const data = await sql<Artisan> `SELECT * FROM artisans WHERE ${artisanId} = id`;
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch categories.');
+  }
+}
