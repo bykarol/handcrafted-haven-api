@@ -13,9 +13,7 @@ export async function fetchAllProducts() {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
   }
-
 }
-
 
 
 export async function fetchAllProductsByCategory(categoryId: number) {
@@ -29,13 +27,14 @@ export async function fetchAllProductsByCategory(categoryId: number) {
 }
 
 
-export async function fetchProductById(productId: number) {
+export async function fetchProductById( productId: number) {
   try {
-    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id WHERE ${productId} = p.id`;
+    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
+    // console.log(data.rows)
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch the product.');
+    throw new Error('Failed to fetch products.');
   }
 }
 
@@ -49,7 +48,6 @@ export async function fetchAllCategories() {
     throw new Error('Failed to fetch categories.');
   }
 }
-
 
 
 export async function fetchCategoryById(categoryId: number) {
