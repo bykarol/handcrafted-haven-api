@@ -10,9 +10,9 @@ export default async function ProductCard({ product }: { product: Product }) {
       {product.artisanfname && (
         <p className="text-center font-bold py-2">Made by {`${product.artisanfname} ${product.artisanlname}`}</p>
       )}
-      <Link href={`#`}>
+      <Link href={`/handcrafted-haven/products/${product.id}`}>
           <Image
-              src={`/${product.id}.webp`}
+              src={`/Product-${product.id}.webp`}
               alt={`Image for ${product.artisan_id}`}
               width={200}
               height={200}
