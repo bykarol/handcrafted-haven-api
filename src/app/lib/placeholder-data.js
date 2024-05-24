@@ -37,4 +37,4 @@ module.exports = {
   categories,
   categoryCrafts,
   artisans
-};
+}; 

@@ -7,15 +7,17 @@ export async function CategoryCard( {category}: {category: Category} ) {
         <>
             <Link href={`/handcrafted-haven/category/${category.id}`}>
                 <Image
-                    src={`/${category.categoryname}.webp`}
+                    className="rounded-full"
+                    src={`/categories/${category.categoryname}.webp`}
                     alt={`Image for ${category.categoryname} category`}
                     width={260}
                     height={260}
                 />
-            </Link>
+            
             <p className='text-center p-3 text-xl'>
                 {category.categoryname}
             </p>
+            </Link>
         </>
     )    
 }

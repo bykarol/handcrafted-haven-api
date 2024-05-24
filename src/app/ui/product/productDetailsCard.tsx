@@ -1,9 +1,10 @@
 import { Product } from "@/app/lib/definitions";
 import Image from "next/image";
 import { primaryFont, secondaryFont } from '@/app/ui/fonts';
+import Link from "next/link";
 
 
-export default function SingleProductCard( { product }: { product: Product } ) { 
+export default function ProductDetailsCard( { product }: { product: Product } ) { 
     const images = [1, 2, 3, 4];
 
     return (
@@ -18,7 +19,7 @@ export default function SingleProductCard( { product }: { product: Product } ) {
                         <Image
                             key={product.id}
                             className="border border-golden m-6 p-2"
-                            src={`/Product-${product.id}-${image}.webp`}
+                            src={`/categories/${product.categoryname}/Product-${product.id}-${image}.webp`}
                             alt={`Image for ${product.artisan_id}`}
                             width={70}
                             height={100}
@@ -28,7 +29,7 @@ export default function SingleProductCard( { product }: { product: Product } ) {
 
                 <div className="p-7">
                     <Image
-                        src={`/Product-${product.id}.webp`}
+                        src={`/categories/${product.categoryname}/Product-${product.id}.webp`}
                         alt={`Image for ${product.artisan_id}`}
                         width={300}
                         height={330}
@@ -38,7 +39,6 @@ export default function SingleProductCard( { product }: { product: Product } ) {
                     </h2>
                 </div>
             </div>
-
 
             <div>
                 <p className="max-w-3xl text-center text-paragraphs ">
@@ -51,14 +51,12 @@ export default function SingleProductCard( { product }: { product: Product } ) {
                 <p className="flex gap-x-10 p-5">
                     Price: ${product.price}
                 </p>                 
-
-                <button className="bg-[#F7BE38] hover:bg-[#F7BE38]/60 rounded-lg text-2xl px-4 text-center inline-flex items-center">
-                    Add to cart
-                </button>
+                
+                <Link href="#" className="bg-[#F7BE38] hover:bg-[#F7BE38]/60 rounded-lg text-2xl px-4 text-center inline-flex items-center">
+                   
+                    <p>Add to the Cart</p>
+                </Link>
             </div>
-
         </>
-    
-        
     )
 }

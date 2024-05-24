@@ -3,7 +3,7 @@ import { fetchAllArtisan } from "@/app/lib/data";
 
 export default async function ArtisanList() {
     const artisans = await fetchAllArtisan();
-    console.log(artisans)
+    // console.log(artisans)
     return (
         <div>
             <ul className="flex flex-row flex-wrap justify-evenly gap-28">

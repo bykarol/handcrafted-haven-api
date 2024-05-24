@@ -18,7 +18,7 @@ export async function fetchAllProducts() {
 
 export async function fetchAllProductsByCategory(categoryId: number) {
   try {
-    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id WHERE ${categoryId} = category_id`;
+    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${categoryId} = category_id`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);

@@ -1,9 +1,9 @@
-import SingleProductList from "@/app/ui/product/SingleProductList";
+import ProductDetailsList from "@/app/ui/product/productDetailsList";
 
 export default function Page( {params}: {params: { id: number }}) {
   return (
     <main>
-      <SingleProductList productId = {params.id} />
+      <ProductDetailsList productId = {params.id} />
     </main>
   );
 }
