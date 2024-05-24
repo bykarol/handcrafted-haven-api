@@ -12,7 +12,7 @@ export default async function ProductCard({ product }: { product: Product }) {
       )}
       <Link href={`/handcrafted-haven/products/${product.id}`}>
           <Image
-              src={`/Product-${product.id}.webp`}
+              src={`/categories/${product.categoryname}/Product-${product.id}.webp`}
               alt={`Image for ${product.artisan_id}`}
               width={200}
               height={200}
@@ -23,8 +23,8 @@ export default async function ProductCard({ product }: { product: Product }) {
         <h3 className="font-semibold py-2">{product.pname}</h3>
         <p>Price: ${product.price}</p>
         {/* <p>Category ID: {product.category_id}</p> */}
-        {product.categoryname &&
-          <p>Category: {product.categoryname}</p>}
+        {/* {product.categoryname &&
+          <p>Category: {product.categoryname}</p>} */}
         {/* <p>Artisan ID: {product.artisan_id}</p> */}
       </div>
       

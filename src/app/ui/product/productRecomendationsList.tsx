@@ -9,11 +9,10 @@ export default async function ProductRecomendationsList() {
 
     let productList: Array<Product> = []
     
-    for (let i=0; i<4; i++) {
+    for (let i=0; i<4; i++) { 
         let id =  randomNumber[i];
         productList = productList.concat(products[id]);
     }
-
 
     return (
         <>
