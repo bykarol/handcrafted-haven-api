@@ -3,6 +3,7 @@ import ProductList from '../ui/product/productList';
 import { CategoryList } from '../ui/category/CategoryList';
 import { primaryFont, secondaryFont } from '../ui/fonts';
 import Search from '@/app/ui/search';
+import { Suspense } from 'react';
 
 export default function Page({
   searchParams,
@@ -19,13 +20,15 @@ export default function Page({
 
   return (
     <main className="mx-20">
-      {query && (
-        <>
-          {/* Search Results */}
-          <h2 className="text-xl py-5 font-bold">Search Results</h2>
-          <ProductList query={query} currentPage={currentPage} />
-        </>
-      )}
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* Search Results */}
+        {query && (
+          <>
+            <h2 className="text-xl py-5 font-bold">Search Results</h2>
+            <ProductList query={query} currentPage={currentPage} />
+          </>
+        )}
+      </Suspense>
 
       {/* Product Recomendations List section */}
       <h2 className="text-xl py-5 font-bold">Product recommendations</h2>
