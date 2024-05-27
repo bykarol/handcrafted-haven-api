@@ -3,6 +3,7 @@ import NavLinks from '@/app/ui/nav/nav-links';
 import Search from '@/app/ui/search';
 import { primaryFont, secondaryFont } from '@/app/ui/fonts';
 import { PowerIcon } from '@heroicons/react/24/outline';
+import { Suspense } from 'react';
 
 export default function Nav() {
   return (
@@ -20,13 +21,17 @@ export default function Nav() {
           <NavLinks />
         </div>
         <div className="mt-0.5 flex items-center justify-between">
-          <Search placeholder="Search" />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Search placeholder="Search" />
+          </Suspense>
         </div>
       </div>
       <div className="sign">
         <form>
           <button>
-            <div className='text-xl p-2 m-1 rounded-xl hover:bg-golden'>Logout</div>
+            <div className="text-xl p-2 m-1 rounded-xl hover:bg-golden">
+              Logout
+            </div>
           </button>
         </form>
       </div>
