@@ -3,8 +3,6 @@ import ProductList from '../ui/product/productList';
 import { CategoryList } from '../ui/category/CategoryList';
 import { primaryFont, secondaryFont } from '../ui/fonts';
 import Search from '@/app/ui/search';
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
 
 export default function Page({
   searchParams,
@@ -21,11 +19,13 @@ export default function Page({
 
   return (
     <main className="mx-20">
-      {/* Search Results */}
-      <h2 className="text-xl py-5 font-bold">Search Results</h2>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ProductList query={query} currentPage={currentPage} />
-      </Suspense>
+      {query && (
+        <>
+          {/* Search Results */}
+          <h2 className="text-xl py-5 font-bold">Search Results</h2>
+          <ProductList query={query} currentPage={currentPage} />
+        </>
+      )}
 
       {/* Product Recomendations List section */}
       <h2 className="text-xl py-5 font-bold">Product recommendations</h2>
