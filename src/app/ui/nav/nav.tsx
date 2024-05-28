@@ -7,17 +7,17 @@ import { Suspense } from 'react';
 
 export default function Nav() {
   return (
-    <div className="py-3 px-7 navegation">
+    <div className="grid grid-cols-3 text-mainTitles py-3 px-7">
       <div>
-        <div className={` ${primaryFont.className} text-4xl text-center`}>
+        <div className={`text-4xl text-center ${primaryFont.className}`}>
           Handcrafted
         </div>
-        <div className={`${secondaryFont.className} text-3xl text-center`}>
+        <div className={`text-3xl text-center ${secondaryFont.className}`}>
           Haven
         </div>
       </div>
       <div>
-        <div className="navegation-links">
+        <div className="flex justify-center">
           <NavLinks />
         </div>
         <div className="mt-0.5 flex items-center justify-between">
@@ -26,7 +26,7 @@ export default function Nav() {
           </Suspense>
         </div>
       </div>
-      <div className="sign">
+      <div className="flex flex-col items-end">
         <form>
           <button>
             <div className="text-xl p-2 m-1 rounded-xl hover:bg-golden">
