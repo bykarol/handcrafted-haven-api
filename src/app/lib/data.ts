@@ -1,12 +1,12 @@
-import { sql } from "@vercel/postgres";
-import { Product, Category, CategoryCrafts, Artisan } from "./definitions";
-import { formatCurrency } from "./utils";
-import { unstable_noStore as noStore } from "next/cache";
-
+import { sql } from '@vercel/postgres';
+import { Product, Category, CategoryCrafts, Artisan } from './definitions';
+import { formatCurrency } from './utils';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export async function fetchAllProducts() {
   try {
-    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id;`;
+    const data =
+      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id;`;
     // console.log(data.rows)
     return data.rows;
   } catch (error) {
@@ -15,10 +15,35 @@ export async function fetchAllProducts() {
   }
 }
 
+const ITEMS_PER_PAGE = 6;
+
+export async function fetchFilteredProducts(
+  query: string,
+  currentPage: number
+) {
+  noStore();
+
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const products =
+      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id
+      WHERE
+        p.pname ILIKE ${`%${query}%`}
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
+    `;
+    //console.log(products.rows);
+    return products.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch filtered products.');
+  }
+}
 
 export async function fetchAllProductsByCategory(categoryId: number) {
   try {
-    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${categoryId} = category_id`;
+    const data =
+      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${categoryId} = category_id`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -26,10 +51,10 @@ export async function fetchAllProductsByCategory(categoryId: number) {
   }
 }
 
-
-export async function fetchProductById( productId: number) {
+export async function fetchProductById(productId: number) {
   try {
-    const data = await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
+    const data =
+      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
     // console.log(data.rows)
     return data.rows;
   } catch (error) {
@@ -38,10 +63,9 @@ export async function fetchProductById( productId: number) {
   }
 }
 
-
 export async function fetchAllCategories() {
   try {
-    const data = await sql<Category> `SELECT * FROM categories`;
+    const data = await sql<Category>`SELECT * FROM categories`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -49,10 +73,10 @@ export async function fetchAllCategories() {
   }
 }
 
-
 export async function fetchCategoryById(categoryId: number) {
   try {
-    const data = await sql<Category> `SELECT * FROM categories WHERE id = ${categoryId}`;
+    const data =
+      await sql<Category>`SELECT * FROM categories WHERE id = ${categoryId}`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -62,7 +86,7 @@ export async function fetchCategoryById(categoryId: number) {
 
 export async function fetchAllArtisan() {
   try {
-    const data = await sql<Artisan> `SELECT * FROM artisans`;
+    const data = await sql<Artisan>`SELECT * FROM artisans`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -70,9 +94,10 @@ export async function fetchAllArtisan() {
   }
 }
 
-export async function fetchArtisanById(artisanId : number) {
+export async function fetchArtisanById(artisanId: number) {
   try {
-    const data = await sql<Artisan> `SELECT * FROM artisans WHERE ${artisanId} = id`;
+    const data =
+      await sql<Artisan>`SELECT * FROM artisans WHERE ${artisanId} = id`;
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
