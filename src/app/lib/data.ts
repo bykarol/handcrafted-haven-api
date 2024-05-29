@@ -53,6 +53,10 @@ export async function fetchAllProductsByCategory(categoryId: number) {
 
 export async function fetchProductById(productId: number) {
   try {
+
+    console.log('Fetching Produc by ID data...');
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const data =
       await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
     // console.log(data.rows)
@@ -65,6 +69,10 @@ export async function fetchProductById(productId: number) {
 
 export async function fetchAllCategories() {
   try {
+
+    console.log('Fetching Categories data...');
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const data = await sql<Category>`SELECT * FROM categories`;
     return data.rows;
   } catch (error) {
@@ -86,6 +94,10 @@ export async function fetchCategoryById(categoryId: number) {
 
 export async function fetchAllArtisan() {
   try {
+    
+    console.log('Fetching Artisan data...');
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const data = await sql<Artisan>`SELECT * FROM artisans`;
     return data.rows;
   } catch (error) {

@@ -1,5 +1,5 @@
 import { randomNumbers } from "@/app/lib/utils";
-import { fetchAllProducts, fetchProductById } from "@/app/lib/data";
+import { fetchAllProducts } from "@/app/lib/data";
 import ProductCard from "./productCard";
 import { Product } from "@/app/lib/definitions";
 
