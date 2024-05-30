@@ -13,7 +13,6 @@ import { Suspense, useState } from 'react';
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(useState);
 
   function getMenuClasses() {
     let menuClases = [];
