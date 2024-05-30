@@ -23,10 +23,11 @@ async function seedProducts(client) {
 
     const insertedProducts = await Promise.all(
       products.map((product) => client.query(`
-        INSERT INTO products (pname, price, category_id, artisan_id)
-        VALUES ($1, $2, $3, $4)
+        INSERT INTO products (pname, price, category_id, artisan_id, quantity,
+          product_description)
+        VALUES ($1, $2, $3, $4, $5, $6)
         ON CONFLICT (id) DO NOTHING;
-      `, [product.pname, product.price, product.category_id, product.artisan_id])),
+      `, [product.pname, product.price, product.category_id, product.artisan_id, product.quantity, product.product_description])),
     );
 
     console.log(`Seeded ${insertedProducts.length} products`);
