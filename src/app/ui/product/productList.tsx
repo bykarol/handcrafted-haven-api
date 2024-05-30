@@ -18,6 +18,7 @@ export default async function ProductList({
   } else {
     products = await fetchAllProducts();
   }
+  console.log(products.length)
 
   return (
     <div>

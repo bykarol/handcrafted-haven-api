@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { Product, Category, CategoryCrafts, Artisan } from './definitions';
+import { Product, Category, Artisan } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
@@ -108,7 +108,7 @@ export async function fetchCategoryById(categoryId: number) {
 
 export async function fetchAllArtisan() {
   try {
-    
+
     console.log('Fetching Artisan data...');
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
