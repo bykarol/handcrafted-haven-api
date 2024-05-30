@@ -54,7 +54,7 @@ export async function fetchAllProductsByCategory(categoryId: number) {
 export async function fetchProductById(productId: number) {
   try {
 
-    console.log('Fetching Produc by ID data...');
+    console.log('Fetching Product by ID data...');
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data =
@@ -66,6 +66,20 @@ export async function fetchProductById(productId: number) {
     throw new Error('Failed to fetch products.');
   }
 }
+
+
+export async function fetchProductByArtisanId(artisanId: number) {
+  try {
+    const data =
+      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${artisanId} = a.id;`;
+    // console.log(data.rows)
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch products.');
+  }
+}
+
 
 export async function fetchAllCategories() {
   try {
