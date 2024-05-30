@@ -5,7 +5,7 @@ import { fetchAllArtisan } from "@/app/lib/data";
 export default async function FeaturedArtisan() {
     const artisansArray = await fetchAllArtisan();
     const artisanId = randomNumbers(artisansArray.length-1);
-    const artisan = artisansArray[artisanId[1]]
+    const artisan = artisansArray[artisanId[1]];
     return(
       <div>
             <h2 className='text-xl py-5 font-bold'>Featured Artisan</h2>
