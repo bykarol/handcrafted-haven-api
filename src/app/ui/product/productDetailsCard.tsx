@@ -20,7 +20,7 @@ export default async function ProductDetailsCard( { productId }: { productId: nu
                     { images.map((image) => (
                         <Image
                             key={product.id}
-                            className="border border-golden p-2"
+                            className="border border-golden p-2 rounded"
                             src={`/categories/${product.categoryname}/Product-${product.id}-${image}.webp`}
                             alt={`Image for ${product.artisan_id}`}
                             width={70}
@@ -31,10 +31,11 @@ export default async function ProductDetailsCard( { productId }: { productId: nu
 
                 <div className="p-7">
                     <Image
+                     className="rounded shadow"
+                     width={300}
+                     height={330}
                         src={`/categories/${product.categoryname}/Product-${product.id}.webp`}
                         alt={`Image for ${product.artisan_id}`}
-                        width={300}
-                        height={330}
                     />
                     <h2 className={`text-center text-xl md:text-4xl ${secondaryFont.className}`}>
                         Made by {product.artisanfname} {product.artisanlname}

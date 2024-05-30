@@ -20,28 +20,36 @@ export default function Page({
   //const totalPages = await fetchInvoicesPages(query);
 
   return (
-    <main className="mx-20">
-      <Suspense fallback={<div>Loading...</div>}>
+    <main className="container box-content mx-auto">
+      <div className='flex flex-col'>
+
         {/* Search Results */}
         {query && (
-          <>
-            <h2 className="text-xl py-5 font-bold">Search Results</h2>
+          <div className='className="mb-8 mt-4'>
+          <Suspense fallback={<div>Loading...</div>}>
+            <h2 className="text-xl font-bold">Search Results</h2>
             <ProductList query={query} currentPage={currentPage} />
-          </>
-        )}
       </Suspense>
+          </div>
+        )}
 
       {/* Product Recomendations List section */}
+      <div className="mb-8 mt-4">
       <h2 className="text-xl py-5 font-bold">Product recommendations</h2>
       <ProductRecomendationsList />
+      </div>
 
-      <div>
+      <div className="my-8">
+      <h2 className='text-xl py-5 font-bold'>Featured Artisan</h2>
             <FeaturedArtisan />
-        </div>
+      </div>
 
       {/* Category List section */}
+      <div className="my-8">
       <h2 className="text-xl py-5 font-bold"> Shop by Category</h2>
-      <CategoryList />
+      <CategoryList />        
+      </div>
+        </div>
     </main>
   );
 }

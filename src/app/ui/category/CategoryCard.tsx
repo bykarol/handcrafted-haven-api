@@ -8,22 +8,23 @@ export async function CategoryCard() {
 
     return (
         <>
-            <ul className="flex flex-row flex-wrap justify-evenly gap-28">
+            <ul className="flex flex-wrap gap-5 md:justify-evenly">
                 {categories.map((category) => (
                     <li key={category.id}> 
                         <Link href={`/handcrafted-haven/category/${category.id}`}>
                             <Image
-                                className="rounded-full"
+                                className="rounded shadow-lg"
+                                width={160}
+                                height={160}
                                 src={`/categories/${category.categoryname}.webp`}
                                 alt={`Image for ${category.categoryname} category`}
-                                width={260}
-                                height={260}
                             />
-                        
-                            <p className='text-center p-3 text-xl'>
+                        </Link>
+                        <Link href={`/handcrafted-haven/category/${category.id}`}>
+                            <p className='text-center p-2 text-xl'>
                                 {category.categoryname}
                             </p>
-                        </Link>
+                        </Link>                     
                     </li>
                 ))}
             </ul>

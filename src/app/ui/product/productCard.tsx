@@ -6,21 +6,22 @@ export default async function ProductCard({ product }: { product: Product }) {
   
   return (
     <>
-
+    <div className="text-center flex flex-col gap-1">
       {product.artisanfname && (
-        <p className="text-center font-bold py-2">Made by {`${product.artisanfname} ${product.artisanlname}`}</p>
+        <p className="font-bold">Made by {`${product.artisanfname} ${product.artisanlname}`}</p>
       )}
       <Link href={`/handcrafted-haven/products/${product.id}`}>
           <Image
-              src={`/categories/${product.categoryname}/Product-${product.id}.webp`}
-              alt={`Image for ${product.artisan_id}`}
-              width={200}
-              height={200}
-          />
+          className="rounded shadow"
+          width={160}
+          height={160}
+          src={`/categories/${product.categoryname}/Product-${product.id}.webp`}
+          alt={`Image for ${product.artisan_id}`}              />
       </Link>
-
-      <div className="p-2 text-center">
-        <h3 className="font-semibold py-2">{product.pname}</h3>
+      <div className="">
+      <Link href={`/handcrafted-haven/products/${product.id}`}>
+        <h3 className="font-semibold">{product.pname}</h3>
+        </Link>
         <p>Price: ${product.price}</p>
         {/* <p>Category ID: {product.category_id}</p> */}
         {/* {product.categoryname &&
@@ -28,6 +29,7 @@ export default async function ProductCard({ product }: { product: Product }) {
         {/* <p>Artisan ID: {product.artisan_id}</p> */}
       </div>
       
+          </div>
       
     </>
   );

@@ -21,7 +21,7 @@ export default async function ProductList({
 
   return (
     <div>
-      <ul className="flex flex-row flex-wrap justify-evenly gap-40 md:m-40">
+      <ul className='flex flex-wrap justify-evenly gap-5'>
         {products.map((product) => (
           <li key={product.id}>
             <ProductCard product={product} />
