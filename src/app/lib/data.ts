@@ -6,9 +6,10 @@ import { unstable_noStore as noStore } from 'next/cache';
 export async function fetchAllProducts() {
   try {
     const data =
-      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id;`;
-    // console.log(data.rows)
-    console.log(data.rows);
+      await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
+      p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
+FROM products p
+JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id;`;
     return data.rows;
     
   } catch (error) {

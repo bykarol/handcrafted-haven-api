@@ -12,7 +12,9 @@ async function seedProducts(client) {
       category_id INT NOT NULL,
       artisan_id INT,
       quantity INT,
-      product_description TEXT
+      product_description TEXT,
+      FOREIGN KEY (artisan_id) REFERENCES artisans(id) ON DELETE CASCADE,
+      FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
     );
   `);
 
@@ -236,9 +238,9 @@ async function seedCustomersHasReviews(client) {
 async function main() {
   const client = await db.connect();
 
-  await seedProducts(client);
-  await seedCategories(client);
   await seedArtisans(client);
+  await seedCategories(client);
+  await seedProducts(client);
   await seedCustomers(client);
   await seedReviews(client);
   await seedCustomersHasReviews(client);

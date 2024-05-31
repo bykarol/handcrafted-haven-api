@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import NavLinks from '@/app/ui/nav/nav-links';
 import Search from '@/app/ui/search';
 import { primaryFont, secondaryFont } from '@/app/ui/fonts';
