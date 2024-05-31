@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { primaryFont, secondaryFont } from '@/app/ui/fonts';
 import Link from "next/link";
-import { fetchProductById } from "@/app/lib/data";
+import { Product } from "@/app/lib/definitions";
 
 
-export default async function ProductDetailsCard( { productId }: { productId: number } ) { 
+export default async function ProductDetailsCard( { product }: { product: Product } ) { 
     const images = [1, 2, 3, 4];
-    const products = await fetchProductById(productId);
-    const product = products[0];
 
+    // console.log(product);
+    
     return (
         <div className='flex flex-col flex-wrap place-content-center gap-16'>
-            <p className="text-4xl text-center">
+            <p className="text-4xl text-center"> 
                 {product.pname}
             </p>
 

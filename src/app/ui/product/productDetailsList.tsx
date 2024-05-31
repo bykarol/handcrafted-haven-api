@@ -1,13 +1,17 @@
 import ProductDetailsCard from "./productDetailsCard";
 import ProductCard from "./productCard";
 import { fetchAllProducts } from "@/app/lib/data";
-import { Product } from "@/app/lib/definitions";
+import { Product } from "@/app/lib/definitions"; 
 import { randomNumbers } from "@/app/lib/utils";
 import { Suspense } from "react";
 import { ProductDetailsSkeleton } from "../skeletons";
 
 export default async function ProductDetailsList( {productId}: {productId: number} ) {
+    
     const products = await fetchAllProducts();
+    
+    // console.log(products);
+
     const randomNumber = randomNumbers(products.length-1);
 
     let productList: Array<Product> = []
@@ -21,7 +25,7 @@ export default async function ProductDetailsList( {productId}: {productId: numbe
             {/* Product Details  */}
             <div>
                 <Suspense fallback={<ProductDetailsSkeleton />} >
-                    < ProductDetailsCard productId={productId}/>
+                    < ProductDetailsCard product={products[productId-1]}/>
                 </Suspense>
             </div>
             
