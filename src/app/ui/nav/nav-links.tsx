@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 const links = [
   {
@@ -30,7 +31,7 @@ export default function NavLinks() {
       {links.map((link) => {
         return (
           <Link key={link.name} href={link.href}>
-            {<p className='text-lg p-2 m-1 rounded-xl hover:bg-golden'>{link.name}</p>}
+            {<p className={clsx('text-lg p-2 m-1 rounded hover:bg-golden', {'bg-golden': pathname === link.href})}>{link.name}</p>}
           </Link>
         );
       })}
