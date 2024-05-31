@@ -8,7 +8,9 @@ export async function fetchAllProducts() {
     const data =
       await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id;`;
     // console.log(data.rows)
+    console.log(data.rows);
     return data.rows;
+    
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');

@@ -1,6 +1,5 @@
 import ProductCard from './productCard';
-import { fetchAllProducts } from '@/app/lib/data';
-import { fetchFilteredProducts } from '@/app/lib/data';
+import { fetchAllProducts, fetchFilteredProducts } from '@/app/lib/data';
 
 interface ProductListProps {
   query?: string;

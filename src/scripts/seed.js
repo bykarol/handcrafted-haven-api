@@ -4,8 +4,6 @@ const { products, categories, artisans, customers, reviews, customerhasreview } 
 
 async function seedProducts(client) {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-
     const createTable = await client.query(`
     CREATE TABLE IF NOT EXISTS products (
       id SERIAL PRIMARY KEY,
@@ -22,12 +20,11 @@ async function seedProducts(client) {
     console.log(`Created "products" table`);
 
     const insertedProducts = await Promise.all(
-      products.map((product) => client.query(`
-        INSERT INTO products (pname, price, category_id, artisan_id, quantity,
-          product_description)
-        VALUES ($1, $2, $3, $4, $5, $6)
+      products.map((product) => client.sql`
+        INSERT INTO products (id, pname, price, category_id, artisan_id, quantity, product_description)
+        VALUES (${product.id}, ${product.pname}, ${product.price}, ${product.category_id}, ${product.artisan_id}, ${product.quantity}, ${product.product_description})
         ON CONFLICT (id) DO NOTHING;
-      `, [product.pname, product.price, product.category_id, product.artisan_id, product.quantity, product.product_description])),
+      `),
     );
 
     console.log(`Seeded ${insertedProducts.length} products`);
@@ -44,7 +41,6 @@ async function seedProducts(client) {
 
 async function seedCategories(client) {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS categories (
@@ -77,7 +73,6 @@ async function seedCategories(client) {
 
 async function seedArtisans(client) {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS artisans (
@@ -114,7 +109,6 @@ async function seedArtisans(client) {
 
 async function seedCustomers(client) {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS buyers (
@@ -160,7 +154,6 @@ async function seedCustomers(client) {
 
 async function seedReviews(client) {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
     await client.query(`
     DO $$ BEGIN
       IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'review_rating') THEN
@@ -205,7 +198,6 @@ async function seedReviews(client) {
 
 async function seedCustomersHasReviews(client) {
   try {
-    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS customerhasreview (
