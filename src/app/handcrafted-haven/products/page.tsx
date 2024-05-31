@@ -1,4 +1,6 @@
 import ProductList from '@/app/ui/product/productList';
+import { ProductsSkeleton } from '@/app/ui/skeletons';
+import { Suspense } from 'react';
 
 export default function Page() {
   return (
@@ -9,7 +11,9 @@ export default function Page() {
         its own story. Explore our selection and discover the beauty of handmade
         craftsmanship.{' '}
       </p>
+      <Suspense fallback={<ProductsSkeleton />}>
       <ProductList />
+      </Suspense>
     </main>
   );
 }

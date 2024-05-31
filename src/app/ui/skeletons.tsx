@@ -77,3 +77,16 @@ export function ArtisansSkeleton() {
         </div>
     );
 }
+
+export function ProductsSkeleton(){
+    return(
+        <div className='animate-pulse flex flex-row flex-wrap justify-evenly gap-28'>
+            <ProductDetailsSkeleton />
+            <ProductDetailsSkeleton />
+            <ProductDetailsSkeleton />
+            <ProductDetailsSkeleton />
+            <ProductDetailsSkeleton />
+        </div>
+
+    );
+}

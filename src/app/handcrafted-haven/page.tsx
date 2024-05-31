@@ -5,6 +5,7 @@ import { primaryFont, secondaryFont } from '../ui/fonts';
 import Search from '@/app/ui/search';
 import { Suspense } from 'react';
 import FeaturedArtisan from '../ui/artisan/FeaturedArtisanCard';
+import { ProductsSkeleton } from '../ui/skeletons';
 
 export default function Page({
   searchParams,
@@ -26,7 +27,7 @@ export default function Page({
         {/* Search Results */}
         {query && (
           <div className='className="mb-8 mt-4'>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<ProductsSkeleton />}>
             <h2 className="text-xl font-bold">Search Results</h2>
             <ProductList query={query} currentPage={currentPage} />
       </Suspense>
