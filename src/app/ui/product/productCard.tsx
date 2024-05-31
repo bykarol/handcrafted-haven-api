@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function ProductCard({ product }: { product: Product }) {
-  
+  // console.log(product)
   return (
     <>
     <div className="text-center flex flex-col gap-1">
@@ -19,17 +19,18 @@ export default async function ProductCard({ product }: { product: Product }) {
           alt={`Image for ${product.artisan_id}`}              />
       </Link>
       <div className="">
-      <Link href={`/handcrafted-haven/products/${product.id}`}>
-        <h3 className="font-semibold">{product.pname}</h3>
+        <Link href={`/handcrafted-haven/products/${product.id}`}>
+          <h3 className="font-semibold">{product.pname}</h3>
         </Link>
         <p>Price: ${product.price}</p>
+
         {/* <p>Category ID: {product.category_id}</p> */}
         {/* {product.categoryname &&
           <p>Category: {product.categoryname}</p>} */}
         {/* <p>Artisan ID: {product.artisan_id}</p> */}
       </div>
       
-          </div>
+    </div>
       
     </>
   );

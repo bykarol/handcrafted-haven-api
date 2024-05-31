@@ -7,6 +7,7 @@ export default async function ProductCategoryList( {categoryId}: {categoryId: nu
 
     const orderBy = ['A-Z', 'Z-A', 'By Author', 'By Price'];
     const products = await fetchAllProductsByCategory(categoryId);
+    console.log(products)
     const categories = await fetchAllCategories();
     const categoryName = categories[categoryId-1].categoryname;
     

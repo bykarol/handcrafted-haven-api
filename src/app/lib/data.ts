@@ -8,8 +8,9 @@ export async function fetchAllProducts() {
     const data =
       await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
       p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
-FROM products p
-JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id;`;
+      FROM products p
+      JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id ORDER BY p.id;`;
+      // console.log(`fetchAllPeoducts : ${data.rows}`)
     return data.rows;
     
   } catch (error) {
@@ -32,8 +33,8 @@ export async function fetchFilteredProducts(
     const products =
       await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
       p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
-FROM products p
-JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id
+      FROM products p
+      JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id
       WHERE
         p.pname ILIKE ${`%${query}%`}
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
@@ -50,8 +51,9 @@ JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id
 export async function fetchAllProductsByCategory(categoryId: number) {
   try {
     const data =
-      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${categoryId} = category_id`;
-    return data.rows;
+      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${categoryId} = p.category_id;`;
+      // console.log(data.rows)
+      return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
@@ -61,12 +63,13 @@ export async function fetchAllProductsByCategory(categoryId: number) {
 export async function fetchProductById(productId: number) {
   try {
 
+    // console.log(`Fetch : ${productId}`)
     console.log('Fetching Product by ID data...');
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data =
       await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
-    // console.log(data.rows)
+      // console.log(`fetch : ${data.rows}`)
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
