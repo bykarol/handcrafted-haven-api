@@ -4,7 +4,7 @@ import { fetchAllCategories } from "@/app/lib/data";
 
  
 export async function CategoryCard() {
-    const categories = await fetchAllCategories();
+    const categories = await fetchAllCategories(); 
 
     return (
         <>

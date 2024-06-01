@@ -106,69 +106,59 @@ const customers = [
 const reviews = [
   {
     id: 1,
-    reviewdescription: "Excelente servicio y atención al cliente.",
+    product_id: 1,
+    reviewdescription: "Beautifully handcrafted vase, a steal at $45! Exquisite design, sturdy build, and unique character make it a standout decor piece. Adds charm and elegance to any space. A must-have for art enthusiasts!",
     reviewrating: "5",
-    reviewdate: "2024-05-01"
+    reviewdate: "2024-05-01",
+    buyer_id: 1
   },
   {
     id: 2,
-    reviewdescription: "Muy buen producto, pero la entrega fue lenta.",
-    reviewrating: "4",
-    reviewdate: "2024-05-10"
+    product_id: 28,
+    reviewdescription: "Absolutely enchanted by these little owls! From their special details to their endearing expressions, they exude charm. I bought it for my mom and she adored them",
+    reviewrating: "5",
+    reviewdate: "2024-05-10",
+    buyer_id: 2
   },
   {
     id: 3,
-    reviewdescription: "Calidad aceptable, pero esperaba más.",
-    reviewrating: "3",
-    reviewdate: "2024-05-15"
+    product_id: 2,
+    reviewdescription: "I am in love with my owl wooden sculpture! The intricate details and smooth finish are impeccable. It's a charming addition to my home decor, emanating a sense of craftsmanship and nature's beauty. Delighted with the purchase!",
+    reviewrating: "5",
+    reviewdate: "2024-05-15",
+    buyer_id: 1
   },
   {
     id: 4,
-    reviewdescription: "El producto no coincide con la descripción.",
-    reviewrating: "2",
-    reviewdate: "2024-05-20"
+    product_id: 12,
+    reviewdescription:  "Thrilled with my 3 stone pendant! Each stone feels unique, and the craftsmanship is evident. It's a wearable work of art that draws compliments wherever I go. Supporting local artists adds extra meaning to this purchase. Highly recommend!",
+    reviewrating: "5",
+    reviewdate: "2024-05-20",
+    buyer_id: 2
   },
   {
     id: 5,
-    reviewdescription: "Muy mala experiencia, no lo recomiendo.",
-    reviewrating: "1",
-    reviewdate: "2024-05-25"
+    product_id: 16,
+    reviewdescription:  "I am very happy with this landscape! Its unique design and vibrant hue bring life to any space. Knowing it's handmade with love adds a special touch. Unfortunately the package arrived damaged in one corner and it chipped the edge of the frame but it didn't compromise the integrity of the piece. I contacted the company and advised to add extra foam when shipping frames. ",
+    reviewrating: "4",
+    reviewdate: "2024-05-25",
+    buyer_id: 1
+  },
+  {
+    id: 6,
+    product_id: 1,
+    reviewdescription: "In awe of my handmade ceramic vase! Its unique design and loving touch make it a treasure. Each brushstroke tells a story, adding warmth to my space. Proud to support artisans who infuse their work with passion and care.",
+    reviewrating: "5",
+    reviewdate: "2024-05-25",
+    buyer_id: 2
   }
 ]
 
-const customerhasreview = [
-  {
-    id: 1,
-    customerid: 1,
-    reviewid: 1
-  },
-  {
-    id: 2,
-    customerid: 2,
-    reviewid: 2
-  },
-  {
-    id: 3,
-    customerid: 1,
-    reviewid: 3
-  },
-  {
-    id: 4,
-    customerid: 2,
-    reviewid: 4
-  },
-  {
-    id: 5,
-    customerid: 1,
-    reviewid: 5
-  }
-]
 
 module.exports = {
   products,
   categories,
   artisans,
   customers,
-  reviews,
-  customerhasreview
+  reviews
 }; 

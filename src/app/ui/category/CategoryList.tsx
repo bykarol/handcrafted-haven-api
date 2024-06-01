@@ -8,7 +8,7 @@ export async function CategoryList() {
         <div>
             <Suspense fallback={<CategoriesSkeleton />} >
                 <CategoryCard />
-            </Suspense>
+            </Suspense> 
         </div>
     );
 }; 

@@ -1,3 +1,4 @@
+
 export type Product = {
   id: number;
   pname: string;
@@ -44,4 +45,6 @@ export type Reviews = {
   reviewrating: string;
   reviewdate: string;
   customerid?: number;
+  customerfname?: string;
+  customerlname?: string;
 }

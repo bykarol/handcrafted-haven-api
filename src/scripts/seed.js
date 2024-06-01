@@ -1,9 +1,17 @@
 require('dotenv').config();
 const { db } = require('@vercel/postgres');
-const { products, categories, artisans, customers, reviews, customerhasreview } = require('../app/lib/placeholder-data.js');
+const { products, categories, artisans, customers, reviews } = require('../app/lib/placeholder-data.js');
 
 async function seedProducts(client) {
   try {
+
+    // await client.sql`DROP TABLE IF EXISTS products`;
+    // await client.sql`DROP TABLE IF EXISTS categories`;
+    // await client.sql`DROP TABLE IF EXISTS artisans`;
+    // await client.sql`DROP TABLE IF EXISTS customers`;
+    // await client.sql`DROP TABLE IF EXISTS reviews`;
+
+
     const createTable = await client.query(`
     CREATE TABLE IF NOT EXISTS products (
       id SERIAL PRIMARY KEY,
@@ -167,9 +175,13 @@ async function seedReviews(client) {
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS reviews (
         id SERIAL PRIMARY KEY,
-        reviewdescription VARCHAR(250),
+        product_id INT,
+        reviewdescription TEXT,
         reviewrating review_rating NOT NULL,
-        reviewdate CHAR(10) NOT NULL
+        reviewdate CHAR(10) NOT NULL,
+        buyer_id INT,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+        FOREIGN KEY (buyer_id) REFERENCES buyers(id) ON DELETE CASCADE
       );
     `;
 
@@ -178,10 +190,12 @@ async function seedReviews(client) {
     const insertedReviews = await Promise.all(
       reviews.map((review) => client.sql`
         INSERT INTO reviews (id,
+          product_id,
           reviewdescription,
           reviewrating,
-          reviewdate)
-        VALUES (${review.id}, ${review.reviewdescription},${review.reviewrating}, ${review.reviewdate})
+          reviewdate,
+          buyer_id )
+        VALUES (${review.id}, ${review.product_id}, ${review.reviewdescription},${review.reviewrating}, ${review.reviewdate}, ${review.buyer_id})
         ON CONFLICT (id) DO NOTHING;
       `),
     );
@@ -198,42 +212,7 @@ async function seedReviews(client) {
   }
 }
 
-async function seedCustomersHasReviews(client) {
-  try {
 
-    const createTable = await client.sql`
-      CREATE TABLE IF NOT EXISTS customerhasreview (
-        id SERIAL PRIMARY KEY,
-        customerid INT,
-        reviewid INT,
-        FOREIGN KEY (customerid) REFERENCES buyers(id) ON DELETE CASCADE,
-        FOREIGN KEY (reviewid) REFERENCES reviews(id) ON DELETE CASCADE
-      );
-    `;
-
-    console.log(`Created "customers has reviews" table`);
-
-    const insertedCustomersHasReviews = await Promise.all(
-      customerhasreview.map((element) => client.sql`
-        INSERT INTO customerhasreview (id,
-          customerid,
-          reviewid)
-        VALUES (${element.id}, ${element.customerid}, ${element.reviewid})
-        ON CONFLICT (id) DO NOTHING;
-      `),
-    );
-
-    console.log(`Seeded ${insertedCustomersHasReviews.length} customers has reviews table`);
-
-    return {
-      createTable,
-      customers: insertedCustomersHasReviews,
-    };
-  } catch (error) {
-    console.error('Error seeding customers has review:', error);
-    throw error;
-  }
-}
 
 async function main() {
   const client = await db.connect();
@@ -243,7 +222,6 @@ async function main() {
   await seedProducts(client);
   await seedCustomers(client);
   await seedReviews(client);
-  await seedCustomersHasReviews(client);
 
   await client.end();
 }

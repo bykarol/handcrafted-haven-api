@@ -18,11 +18,11 @@ export default async function ProductCategoryList( {categoryId}: {categoryId: nu
                 <h2> {categoryName} Craft</h2>
             </div>
 
-            <div className="flex flex-wrap gap-20 m-2">
+            <div className="flex flex-col md:flex-row gap-20 m-2">
 
                 <div className="flex md:flex-col gap-10">
-                    <div>
-                        {/* List of Order By */}
+                    {/* <div>
+                        {/* List of Order By 
                         <button id="dropOrder" data-dropdown-toggle="dropdownOrder" className='text-xl inline-flex items-center hover:scale-125 font-bold' type='button'>
                             Order By &#9660;
                         </button>
@@ -38,12 +38,12 @@ export default async function ProductCategoryList( {categoryId}: {categoryId: nu
                             ))}
                             </ul>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div>
+                    <div className="mt-10">
                         {/* List of categories */}
                         <button id="dropCategories" data-dropdown-toggle="dropdown" className='text-xl inline-flex items-center hover:scale-125 font-bold' type='button'>
-                            Categories &#9660;
+                            Categories&#9660;
                         </button>
 
                         <div id="dropdown" className='hidden bg-lightGray rounded-lg shadow-lg shadow-gray w-44 '>
@@ -62,7 +62,7 @@ export default async function ProductCategoryList( {categoryId}: {categoryId: nu
                 </div>
 
               
-                <ul className='flex flex-row flex-wrap sm:justify-evenly gap-16 md:border-l-2'>
+                <ul className='flex flex-row flex-wrap sm:justify-evenly gap-16 md:border-l-2 p-10'>
                     {products.map((product) => (
                         <li key={product.id}>
                             <ProductCard product={product} />

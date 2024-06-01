@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import { Product, Category, Artisan } from './definitions';
+import { Product, Category, Artisan, Reviews } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
@@ -145,5 +145,17 @@ export async function fetchArtisanById(artisanId: number) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch categories.');
+  }
+}
+
+export async function fetchReviewById(productId: number) {
+  try {
+    const data = 
+      await sql<Reviews>`SELECT * FROM reviews r JOIN buyers b ON r.buyer_id = b.id WHERE ${productId} = product_id`;
+      // console.log(data.rows);
+    return data.rows;
+  } catch(error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch Review.');
   }
 }
