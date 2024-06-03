@@ -9,9 +9,12 @@ import {
   ArrowsPointingInIcon,
 } from '@heroicons/react/24/outline';
 import { Suspense, useState } from 'react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
+  console.log(session);
 
   function getMenuClasses() {
     let menuClases = [];
@@ -66,13 +69,24 @@ export default function Nav() {
       </div>
 
       <div className="flex flex-col md:items-end">
-        <form>
-          <button>
+        {session?.user ? (
+          <div className="Flex items-center">
+            <p>{session.user.name}</p>
+            <img
+              src={session.user.image ?? '/default-image.png'}
+              alt={session.user.name ?? 'User Image'}
+              className="w-10 h-10 rounded-full center"
+            />
+
+            <button onClick={() => signOut()}>Logout</button>
+          </div>
+        ) : (
+          <button onClick={() => signIn()}>
             <div className="text-xl p-2 m-1 rounded-xl hover:bg-golden">
-              Logout
+              Sign In
             </div>
           </button>
-        </form>
+        )}
       </div>
     </nav>
   );
