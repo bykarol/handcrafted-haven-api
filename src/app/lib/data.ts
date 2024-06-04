@@ -35,7 +35,11 @@ export async function fetchFilteredProducts(
       FROM products p
       JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id
       WHERE
-        p.pname ILIKE ${`%${query}%`}
+        p.pname ILIKE ${`%${query}%`} OR 
+        p.product_description ILIKE ${`%${query}%`} OR
+        artisanfname ILIKE ${`%${query}%`} OR 
+        a.artisanlname ILIKE ${`%${query}%`} 
+
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
     `;
     //console.log(products.rows);
