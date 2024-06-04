@@ -20,7 +20,6 @@ export const createReview = async (formData: FormData, product_id: number) => {
 
     console.log({newReview, product_id})
 
-
     // Insert data into the database
     // try {
     //     await sql`
@@ -33,9 +32,39 @@ export const createReview = async (formData: FormData, product_id: number) => {
     //     };
     // }
     
-
     revalidatePath(`/handcrafted-haven/products/${product_id}`);
     redirect(`/handcrafted-haven/products/${product_id}`);
-    
 
 }
+
+
+// Update Bio action for Artisan Form 
+
+  export async function updateBioWithId(
+    // id: string,
+    // prevState: State,
+    // artisans: Artisan,
+    formData: FormData
+  ) {
+        
+    const UpdateBio = ({
+      artisanId: formData.get('id'),
+      artisanfname: formData.get('artisanfname'),
+      artisanlname: formData.get('artisanlname'),
+      artisanemail: formData.get('artisanemail'),
+      artisanphone: formData.get('artisanphone'),
+      artisaninfo: formData.get('artisaninfo')
+    });
+        //  If form validation fails, return errors early. Otherwise, continue.
+    if (!UpdateBio) {
+      return {
+        message: 'Missing Fields. Failed to Update Bio.',
+      };
+    }
+        // console.log(UpdateBio);
+    //   Prepare data for insertion into the database
+    // pero 
+   
+    revalidatePath('/handcrafted-haven/artisans');
+    redirect('/handcrafted-haven/artisans');
+  }
