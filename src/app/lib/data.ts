@@ -127,7 +127,9 @@ export async function fetchAllArtisan() {
   try {
 
     console.log('Fetching Artisan data...');
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
+    // /////////
+    // /////////
+    //await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data = await sql<Artisan>`SELECT * FROM artisans`;
     return data.rows;
