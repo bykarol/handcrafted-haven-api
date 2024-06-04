@@ -1,8 +1,6 @@
 import ProductRecomendationsList from '../ui/product/productRecomendationsList';
 import ProductList from '../ui/product/productList';
 import { CategoryList } from '../ui/category/CategoryList';
-import { primaryFont, secondaryFont } from '../ui/fonts';
-import Search from '@/app/ui/search';
 import { Suspense } from 'react';
 import { ProductsSkeleton } from '../ui/skeletons';
 import FeaturedArtisanList from '../ui/artisan/FeaturedArtisanList';
