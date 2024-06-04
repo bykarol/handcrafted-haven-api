@@ -14,7 +14,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
-  console.log(session);
+  //console.log(session);
 
   function getMenuClasses() {
     let menuClases = [];
