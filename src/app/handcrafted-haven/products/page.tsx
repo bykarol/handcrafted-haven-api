@@ -1,10 +1,38 @@
 import ProductList from '@/app/ui/product/productList';
 import { ProductsSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
+import { fetchProductPages } from '@/app/lib/data';
+import Pagination from '@/app/ui/pagination';
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const totalPages = await fetchProductPages(query);
+
   return (
     <main>
+      {/* Search Results */}
+      {query && (
+        <div className='className="mb-8 mt-4'>
+          <Suspense fallback={<ProductsSkeleton />}>
+            <h2 className="text-xl font-bold">Search Results</h2>
+            <ProductList query={query} currentPage={currentPage} />
+          </Suspense>
+
+          <div className="mt-5 flex w-full justify-center">
+            <Pagination totalPages={totalPages} />
+          </div>
+        </div>
+      )}
+
       <p className="m-auto mt-20 mb-10 text-center p-10 md:text-xl text-mainTitles font-bold max-w-4xl ">
         Our collection features a variety of handmade products crafted with care
         and passion. From unique accessories to charming decor, each item tells
@@ -12,12 +40,11 @@ export default function Page() {
         craftsmanship.{' '}
       </p>
 
-      <div className='border-t-2 border-golden py-10'>
+      <div className="border-t-2 border-golden py-10">
         <Suspense fallback={<ProductsSkeleton />}>
           <ProductList />
         </Suspense>
       </div>
-        
     </main>
   );
 }

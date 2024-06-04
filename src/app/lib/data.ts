@@ -10,16 +10,15 @@ export async function fetchAllProducts() {
       p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
       FROM products p
       JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id ORDER BY p.id;`;
-      // console.log(`fetchAllPeoducts : ${data.rows}`)
+    // console.log(`fetchAllPeoducts : ${data.rows}`)
     return data.rows;
-    
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
   }
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 4;
 
 export async function fetchFilteredProducts(
   query: string,
@@ -36,11 +35,15 @@ export async function fetchFilteredProducts(
       FROM products p
       JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id
       WHERE
-        p.pname ILIKE ${`%${query}%`}
+        p.pname ILIKE ${`%${query}%`} OR 
+        p.product_description ILIKE ${`%${query}%`} OR
+        artisanfname ILIKE ${`%${query}%`} OR 
+        a.artisanlname ILIKE ${`%${query}%`} 
+
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
     `;
     //console.log(products.rows);
-    
+
     return products.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -55,8 +58,8 @@ export async function fetchAllProductsByCategory(categoryId: number) {
       p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
       FROM products p
       JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${categoryId} = p.category_id ORDER BY p.id;`;
-      // console.log(data.rows)
-      return data.rows;
+    // console.log(data.rows)
+    return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
@@ -65,21 +68,19 @@ export async function fetchAllProductsByCategory(categoryId: number) {
 
 export async function fetchProductById(productId: number) {
   try {
-
     // console.log(`Fetch : ${productId}`)
     console.log('Fetching Product by ID data...');
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data =
       await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
-      // console.log(`fetch : ${data.rows}`)
+    // console.log(`fetch : ${data.rows}`)
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
   }
 }
-
 
 export async function fetchProductByArtisanId(artisanId: number) {
   try {
@@ -89,7 +90,7 @@ export async function fetchProductByArtisanId(artisanId: number) {
       FROM products p
       JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${artisanId} = a.id ORDER BY p.id;`;
 
-      // console.log(data.rows)
+    // console.log(data.rows)
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -97,10 +98,8 @@ export async function fetchProductByArtisanId(artisanId: number) {
   }
 }
 
-
 export async function fetchAllCategories() {
   try {
-
     console.log('Fetching Categories data...');
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -125,7 +124,6 @@ export async function fetchCategoryById(categoryId: number) {
 
 export async function fetchAllArtisan() {
   try {
-
     console.log('Fetching Artisan data...');
     // /////////
     // /////////
@@ -152,12 +150,32 @@ export async function fetchArtisanById(artisanId: number) {
 
 export async function fetchReviewById(productId: number) {
   try {
-    const data = 
+    const data =
       await sql<Reviews>`SELECT * FROM reviews r JOIN buyers b ON r.buyer_id = b.id WHERE ${productId} = product_id`;
-      // console.log(data.rows);
+    // console.log(data.rows);
     return data.rows;
-  } catch(error) {
+  } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch Review.');
+  }
+}
+
+export async function fetchProductPages(query: string) {
+  noStore();
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM products p
+  
+    WHERE
+        p.pname ILIKE ${`%${query}%`}
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    //console.log(totalPages);
+    //console.log(ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of products.');
   }
 }
