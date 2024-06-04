@@ -3,14 +3,14 @@ import { fetchAllCategories } from "@/app/lib/data";
 import ProductCard from "../product/productCard";
 
 
-export default async function ProductCategoryList( {categoryId}: {categoryId: number} ) {
+export default async function ProductCategoryList({ categoryId }: { categoryId: number }) {
 
     const orderBy = ['A-Z', 'Z-A', 'By Author', 'By Price'];
     const products = await fetchAllProductsByCategory(categoryId);
-    console.log(products)
+    // console.log(products)
     const categories = await fetchAllCategories();
-    const categoryName = categories[categoryId-1].categoryname;
-    
+    const categoryName = categories[categoryId - 1].categoryname;
+
     return (
         <>
             {/* Title - Type of Category */}
@@ -48,20 +48,20 @@ export default async function ProductCategoryList( {categoryId}: {categoryId: nu
 
                         <div id="dropdown" className='hidden bg-lightGray rounded-lg shadow-lg shadow-gray w-44 '>
                             <ul className='py-2 text-lg' aria-labelledby='dropCategories'>
-                            {categories.map((category) => (
-                                <li className='' key={category.id}>
-                                    <a href={`/handcrafted-haven/category/${category.id}`} className='block px-4 py-2 hover:bg-mainTitles hover:text-background'>
-                                        {category.categoryname}
-                                    </a>
-                                </li>
-                            ))}
+                                {categories.map((category) => (
+                                    <li className='' key={category.id}>
+                                        <a href={`/handcrafted-haven/category/${category.id}`} className='block px-4 py-2 hover:bg-mainTitles hover:text-background'>
+                                            {category.categoryname}
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                         <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js" async></script>
                     </div>
                 </div>
 
-              
+
                 <ul className='flex flex-row flex-wrap sm:justify-evenly gap-16 md:border-l-2 p-10'>
                     {products.map((product) => (
                         <li key={product.id}>
