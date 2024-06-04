@@ -1,23 +1,21 @@
 import ArtisanCard from "./ArtisanCard";
-import { Suspense } from "react";
-import { ArtisansSkeleton } from "../skeletons";
-
-import FeaturedArtisan from "./FeaturedArtisanCard";
+import { fetchAllArtisan } from "@/app/lib/data";
 
 export default async function ArtisanList() {
+    
+    const artisans = await fetchAllArtisan();
 
     return (
         <>
-        <div>
-            <Suspense fallback={<ArtisansSkeleton />}>
-                <ArtisanCard />
-            </Suspense>
-        </div>
-
-        <div>
-            <FeaturedArtisan />
-        </div>
+            <div>
+                <ul className="flex flex-wrap justify-evenly gap-5">
+                    {artisans.map((artisan) => (
+                        <li key={artisan.id}>
+                            <ArtisanCard artisan = {artisan}/>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
     );
-
 }
