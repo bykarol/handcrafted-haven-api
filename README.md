@@ -29,6 +29,7 @@ Users can browse through the catalog, filter by category, price range, or other 
 - [NextAuth JS - docs](https://next-auth.js.org/)
 - [NextJS Tutorial - All 12 concepts you need to know](https://www.youtube.com/watch?v=vwSlYG7hFk0)
 - [NextJS Tutorial - Building an E-commerce (Spanish)](https://www.youtube.com/watch?v=oHRScyU-ffg&list=PLCKuOXG0bPi3y7tz8Hq6itoi1vhPf6eVG)
+- [NextAuth.js - Google Provider - DOC](https://next-auth.js.org/providers/google)
 
 
 # Developers
