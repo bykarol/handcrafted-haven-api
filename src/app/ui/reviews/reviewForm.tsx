@@ -18,7 +18,7 @@ export default function Review( {productId}: { productId: number} ) {
                     formRef.current?.reset()
                 }}>
 
-                <div className="flex flex-col text-xl">
+                <div className="flex flex-col text-xl ">
                     <label htmlFor="descriptionLabel">Description </label>
                     <textarea name="reviewdescription" id="descriptionLabel" 
                             className="border border-gray rounded-md p-2 mb-10 block" 

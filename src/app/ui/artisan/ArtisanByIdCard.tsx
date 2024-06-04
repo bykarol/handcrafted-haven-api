@@ -1,5 +1,6 @@
 import { Artisan } from "@/app/lib/definitions";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function ArtisanByIdCard({artisan}: {artisan:Artisan}) {
     return (
@@ -18,7 +19,11 @@ export default async function ArtisanByIdCard({artisan}: {artisan:Artisan}) {
                     src={`/artisans/${artisan.artisanfname}-${artisan.artisanlname}.png`}
                     alt={`Picture of ${artisan.artisanfname} ${artisan.artisanlname}`}
                     />
-           
+                    
+                <Link href={`/handcrafted-haven/artisans/${artisan.id}/edit`} className="bg-[#F7BE38] hover:bg-[#F7BE38]/60 rounded-lg px-4 inline-flex">
+                {/* <p>Edit Bio id={artisan.id}</p> */}
+                <p>Edit Bio</p>
+                </Link>
         </div>
     );
 }
