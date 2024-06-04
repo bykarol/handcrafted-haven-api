@@ -19,6 +19,7 @@ export default async function ProductByArtisanCard({ product }: { product: Produ
       <div className="p-2 ">
         <h3 className="font-semibold py-2">{product.pname}</h3>
         <p>Price: ${product.price}</p>
+        <p>Description: {product.product_description}</p>
       </div>     
     </div>
   );
