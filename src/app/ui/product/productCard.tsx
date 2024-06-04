@@ -11,43 +11,43 @@ export default async function ProductCard({ product }: { product: Product }) {
   let totalRating = 0;
 
   if (reviews.length != 0) {
-      reviews.map((review) => (
-          reviewTotal = reviewTotal + Number(review.reviewrating)
-      ))
-      totalRating = Math.round(reviewTotal / reviews.length)
+    reviews.map((review) => (
+      reviewTotal = reviewTotal + Number(review.reviewrating)
+    ))
+    totalRating = Math.round(reviewTotal / reviews.length)
+
   }
 
   return (
     <>
-    <div className="text-center flex flex-col gap-1">
-      {product.artisanfname && (
-        <p className="font-bold">Made by {`${product.artisanfname} ${product.artisanlname}`}</p>
-      )}
-      <Link href={`/handcrafted-haven/products/${product.id}`}>
+      <div className="text-center flex flex-col gap-1">
+        {product.artisanfname && (
+          <p className="font-bold">Made by {`${product.artisanfname} ${product.artisanlname}`}</p>
+        )}
+        <Link href={`/handcrafted-haven/products/${product.id}`}>
           <Image
-          className="rounded shadow"
-          width={160}
-          height={160}
-          src={`/categories/${product.categoryname}/Product-${product.id}.webp`}
-          alt={`Image for ${product.artisan_id}`}              />
-      </Link>
+            className="rounded shadow"
+            width={160}
+            height={160}
+            src={`/categories/${product.categoryname}/Product-${product.id}.webp`}
+            alt={`Image for ${product.pname}`} />
+        </Link>
 
-      <Image
+        <Image
           className="m-2 "
           width={80}
           height={50}
           src={`/${totalRating}star.png`}
           alt={`Image of ${totalRating} stars review`} />
-    
-      <div className="">
-        <Link href={`/handcrafted-haven/products/${product.id}`}>
-          <h3 className="font-semibold">{product.pname}</h3>
-        </Link>
-        <p>Price: ${product.price}</p>
+
+        <div className="">
+          <Link href={`/handcrafted-haven/products/${product.id}`}>
+            <h3 className="font-semibold">{product.pname}</h3>
+          </Link>
+          <p>Price: ${product.price}</p>
+        </div>
       </div>
-      
-    </div>
-      
+
     </>
   );
 };

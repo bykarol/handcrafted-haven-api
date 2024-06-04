@@ -44,6 +44,7 @@ export async function fetchFilteredProducts(
     `;
     //console.log(products.rows);
 
+
     return products.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -60,6 +61,8 @@ export async function fetchAllProductsByCategory(categoryId: number) {
       JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${categoryId} = p.category_id ORDER BY p.id;`;
     // console.log(data.rows)
     return data.rows;
+    // console.log(data.rows)
+    return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
@@ -68,14 +71,16 @@ export async function fetchAllProductsByCategory(categoryId: number) {
 
 export async function fetchProductById(productId: number) {
   try {
-    // console.log(`Fetch : ${productId}`)
+
     console.log('Fetching Product by ID data...');
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const data =
-      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
-    // console.log(`fetch : ${data.rows}`)
-    return data.rows;
+    const data = await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
+    p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
+    FROM products p
+    JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE p.id = ${productId};`;
+
+    return data.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
@@ -88,7 +93,7 @@ export async function fetchProductByArtisanId(artisanId: number) {
       await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
       p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
       FROM products p
-      JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${artisanId} = a.id ORDER BY p.id;`;
+      JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${artisanId} = a.id;`;
 
     // console.log(data.rows)
     return data.rows;
@@ -152,6 +157,7 @@ export async function fetchReviewById(productId: number) {
   try {
     const data =
       await sql<Reviews>`SELECT * FROM reviews r JOIN buyers b ON r.buyer_id = b.id WHERE ${productId} = product_id`;
+    // console.log(data.rows);
     // console.log(data.rows);
     return data.rows;
   } catch (error) {
