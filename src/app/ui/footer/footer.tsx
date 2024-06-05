@@ -12,7 +12,7 @@ export default function Footer() {
                 <div className="text-right text-lg my-5 pr-3">
                     {/* <FooterLinks /> */}
                     <span className="underline mx-3">Want to see the code? </span>
-                    <a className="bg-golden rounded-md px-10 py-2 mt-10 hover:bg-[#F7BE38]/60" href="https://github.com/bykarol/handcrafted-haven-api" target='_blank'>GitHub Repo</a>
+                    <a className="bg-golden text-textButtons font-bold rounded-md px-10 py-2 mt-10 hover:bg-[#F7BE38]/60" href="https://github.com/bykarol/handcrafted-haven-api" target='_blank'>GitHub Repo</a>
                 </div>
             </div>
             <div className="pt-4 pr-4">

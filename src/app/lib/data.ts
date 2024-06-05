@@ -74,7 +74,7 @@ export async function fetchAllProductsByCategory(categoryId: number) {
 export async function fetchProductById(productId: number) {
   try {
     // console.log(`Fetch : ${productId}`)
-    console.log('Fetching Product by ID data...');
+    // console.log('Fetching Product by ID data...');
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data =
@@ -108,7 +108,7 @@ export async function fetchProductByArtisanId(artisanId: number) {
 
 export async function fetchAllCategories() {
   try {
-    console.log('Fetching Categories data...');
+    // console.log('Fetching Categories data...');
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data = await sql<Category>`SELECT * FROM categories`;

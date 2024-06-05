@@ -37,9 +37,7 @@ export default async function Page({
       )}
 
       <h1 className="text-xl py-5 font-bold">Artisans page</h1>
-      <Suspense fallback={<ArtisansSkeleton />}>
         <ArtisanList />
-      </Suspense>
 
       <h2 className="text-xl my-10 p-5 font-bold border-t-2 border-golden ">
         Featured Artisan

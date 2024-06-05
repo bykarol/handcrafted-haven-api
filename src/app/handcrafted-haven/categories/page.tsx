@@ -36,9 +36,7 @@ export default async function Page({
 
       <div className="border-t-2 border-golden py-10">
         <h1 className='text-2xl py-5 font-bold'>Check out our products by categories</h1>
-        <Suspense fallback={<ProductsSkeleton />}>
           <CategoryList />
-        </Suspense>
       </div>
     </main>
   );
