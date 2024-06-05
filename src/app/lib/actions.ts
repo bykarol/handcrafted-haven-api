@@ -3,22 +3,32 @@
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { z } from "zod";
 
-export const createReview = async (formData: FormData, product_id: number) => {
+const ReviewSchema = z.object ({
+    id: z.number(),
+    product_id_s: z.string(),
+    reviewdescription: z.string(),
+    reviewrating: z.string(),
+    reviewdate: z.string(),
+})
 
-  const reviewdescription = formData.get('reviewdescription')
-  const reviewrating = formData.get('reviewrating')
-  const reviewdate = formData.get('reviewdate')
+const CreateReview = ReviewSchema.omit({id:true});
+// export const createReview = async (formData: FormData, product_id: number) => {
+export async function createReview(formData: FormData) {
 
-  if (!reviewdescription || !reviewrating || !reviewdate) return
+    console.log(formData);
+    const {product_id_s, reviewdescription, reviewrating, reviewdate} = CreateReview.parse ({
+        product_id_s: formData.get('product_id'),
+        reviewdescription: formData.get('reviewdescription'),
+        reviewrating: formData.get('reviewrating'),
+        reviewdate: formData.get('reviewdate'),
 
-  const newReview = {
-    reviewdescription: reviewdescription.toString(),
-    reviewrating: reviewrating.toString(),
-    reviewdate: reviewdate.toString()
-  }
+    });
 
-  // console.log({newReview, product_id})
+    const product_id = parseInt(product_id_s);
+    console.log({product_id, reviewdescription, reviewrating, reviewdate});
+
 
   // Insert data into the database
   // try {

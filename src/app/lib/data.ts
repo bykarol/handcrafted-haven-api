@@ -73,8 +73,11 @@ export async function fetchProductById(productId: number) {
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data =
-      await sql<Product>`SELECT * FROM products p JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id;`;
-    // console.log(`fetch : ${data.rows}`)
+    await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
+    p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
+    FROM products p
+    JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id ORDER BY p.id;`;
+      // console.log(`fetch : ${data.rows}`)
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);

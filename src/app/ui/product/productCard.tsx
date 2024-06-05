@@ -19,7 +19,6 @@ export default async function ProductCard({ product }: { product: Product }) {
 
   return (
     <>
-    <div className="text-center flex flex-col gap-1">
       {product.artisanfname && (
         <p className="font-bold">Made by {`${product.artisanfname} ${product.artisanlname}`}</p>
       )}
@@ -33,7 +32,7 @@ export default async function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <Image
-          className="m-2 "
+          className="m-2"
           width={80}
           height={50}
           src={`/${totalRating}star.png`}
@@ -44,10 +43,7 @@ export default async function ProductCard({ product }: { product: Product }) {
           <h3 className="font-semibold">{product.pname}</h3>
         </Link>
         <p>Price: ${product.price}</p>
-      </div>
-      
-    </div>
-      
+      </div>      
     </>
   );
 };

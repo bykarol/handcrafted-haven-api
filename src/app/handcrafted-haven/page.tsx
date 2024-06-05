@@ -21,8 +21,9 @@ export default async function Page({
   const totalPages = await fetchProductPages(query);
 
   return (
-    <main className="container box-content p-3 mx-auto">
-      <div className="flex flex-col">
+    <main className="container box-content p-5 mx-auto">
+      <div className='flex flex-col'>
+
         {/* Search Results */}
         {query && (
           <div className='className="mb-8 mt-4'>
@@ -38,18 +39,18 @@ export default async function Page({
         )}
 
         <div className="mb-8 mt-4">
-          <h2 className="text-xl py-5 font-bold">Product recommendations</h2>
+          <h2 className="text-2xl py-5 font-bold">Product Recommendations</h2>
           <ProductRecomendationsList />
         </div>
 
         <div className="my-8">
-          <h2 className="text-xl py-5 font-bold">Featured Artisan</h2>
+          <h2 className='text-2xl py-5 font-bold'>Featured Artisan</h2>
           <FeaturedArtisanList />
         </div>
 
         <div className="my-8">
-          <h2 className="text-xl py-5 font-bold">Shop by Category</h2>
-          <CategoryList />
+          <h2 className="text-2xl py-5 font-bold">Shop by Category</h2>
+          <CategoryList />        
         </div>
       </div>
     </main>
