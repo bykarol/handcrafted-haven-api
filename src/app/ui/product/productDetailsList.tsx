@@ -6,9 +6,18 @@ import { randomNumbers } from "@/app/lib/utils";
 import ReviewList from "../reviews/reviewList";
 import Review from "../reviews/reviewForm";
 
+import { fetchAllReviews } from "@/app/lib/data";
+
 
 export default async function ProductDetailsList( {productId}: {productId: number} ) {
     
+
+    const arrayReviews = await fetchAllReviews();
+    const nextReview = arrayReviews.length + 1;
+    // console.log(nextReview.length);
+    // console.log(arrayReviews)
+
+
     const products = await fetchAllProducts();
     
     // Calculate total rating per product
@@ -49,7 +58,7 @@ export default async function ProductDetailsList( {productId}: {productId: numbe
             <div className="border-t-2 border-golden">
                 <h2 className="font-black text-2xl	my-10">Reviews</h2>
                 <ReviewList productId = {productId}/>
-                <Review productId = {productId} />
+                <Review productId={productId} nextReview={nextReview} />
             </div> 
 
             
@@ -62,6 +71,8 @@ export default async function ProductDetailsList( {productId}: {productId: numbe
                 </li>
                 ))}
             </ul>
+
+            
         </>
     )
 }

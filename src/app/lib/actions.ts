@@ -6,19 +6,20 @@ import { redirect } from 'next/navigation';
 import { z } from "zod";
 
 const ReviewSchema = z.object ({
-    id: z.number(),
+    id_s: z.string(),
     product_id_s: z.string(),
     reviewdescription: z.string(),
     reviewrating: z.string(),
     reviewdate: z.string(),
 })
 
-const CreateReview = ReviewSchema.omit({id:true});
+const CreateReview = ReviewSchema;
 // export const createReview = async (formData: FormData, product_id: number) => {
 export async function createReview(formData: FormData) {
 
-    console.log(formData);
-    const {product_id_s, reviewdescription, reviewrating, reviewdate} = CreateReview.parse ({
+    // console.log({formData});
+    const {id_s, product_id_s, reviewdescription, reviewrating, reviewdate} = CreateReview.parse ({
+        id_s: formData.get('id'),
         product_id_s: formData.get('product_id'),
         reviewdescription: formData.get('reviewdescription'),
         reviewrating: formData.get('reviewrating'),
@@ -27,25 +28,25 @@ export async function createReview(formData: FormData) {
     });
 
     const product_id = parseInt(product_id_s);
-    console.log({product_id, reviewdescription, reviewrating, reviewdate});
+    const id = parseInt(id_s);
+    console.log({id, product_id, reviewdescription, reviewrating, reviewdate});
 
 
-  // Insert data into the database
-  // try {
-  //     await sql`
-  //     INSERT INTO reviews (product_id, reviewdescription, reviewrating, reviewdate)
-  //     VALUES (${product_id}, ${newReview.reviewdescription}, ${newReview.reviewrating}, ${newReview.reviewdate})`;
-  // } catch (error) {
-  //     // If a database error occurs, return a more specific error.
-  //     return {
-  //         message: 'Database Error: Failed to Create Invoice.',
-  //     };
-  // }
+  // // Insert data into the database
+   try {
+      await sql`
+      INSERT INTO reviews (id, product_id, reviewdescription, reviewrating, reviewdate)
+      VALUES (${id}, ${product_id}, ${reviewdescription}, ${reviewrating}, ${reviewdate})`;
+    } catch (error) {
+        // If a database error occurs, return a more specific error.
+        // return {
+            console.error ('Database Error: Failed to Create Invoice.', error);
+        // };
+    }
 
-  revalidatePath(`/handcrafted-haven/products/${product_id}`);
-  redirect(`/handcrafted-haven/products/${product_id}`);
-
-}
+    revalidatePath(`/handcrafted-haven/products/${product_id}`);
+    redirect(`/handcrafted-haven/products/${product_id}`);
+ }
 
 
 // Update Bio action for Artisan Form 
