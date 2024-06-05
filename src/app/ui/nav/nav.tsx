@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Suspense, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,12 +39,14 @@ export default function Nav() {
   return (
     <nav className="text-mainTitles py-3 px-7 sm:p-6 md:flex md:justify-between md:items-center">
       <div>
-        <div className={`text-4xl text-center ${primaryFont.className}`}>
-          Handcrafted
-        </div>
-        <div className={`text-3xl text-center ${secondaryFont.className}`}>
-          Haven
-        </div>
+        <Link href='/handcrafted-haven'>
+          <div className={`text-3xl text-center ${primaryFont.className}`}>
+            Handcrafted
+          </div>
+          <div className={`text-2xl text-center ${secondaryFont.className}`}>
+            Haven
+          </div>
+        </Link>
       </div>
 
       <div className="md:hidden flex items-center">
