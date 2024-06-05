@@ -3,14 +3,20 @@ import { Product, Category, Artisan, Reviews } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
-export async function fetchAllProducts() {
+const ITEMS_PER_PAGE_ALL = 10;
+
+export async function fetchAllProducts(currentPage: number) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE_ALL;
+
   try {
     const data =
       await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
       p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
       FROM products p
-      JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id ORDER BY p.id;`;
-    // console.log(`fetchAllPeoducts : ${data.rows}`)
+      JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id 
+      ORDER BY p.id
+      LIMIT ${ITEMS_PER_PAGE_ALL} OFFSET ${offset};`;
+    // console.log(`fetchAllProducts : ${data.rows}`)
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -18,7 +24,7 @@ export async function fetchAllProducts() {
   }
 }
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE_FILTERED = 4;
 
 export async function fetchFilteredProducts(
   query: string,
@@ -26,7 +32,7 @@ export async function fetchFilteredProducts(
 ) {
   noStore();
 
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE_FILTERED;
 
   try {
     const products =
@@ -39,8 +45,7 @@ export async function fetchFilteredProducts(
         p.product_description ILIKE ${`%${query}%`} OR
         artisanfname ILIKE ${`%${query}%`} OR 
         a.artisanlname ILIKE ${`%${query}%`} 
-
-      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
+      LIMIT ${ITEMS_PER_PAGE_FILTERED} OFFSET ${offset};
     `;
     //console.log(products.rows);
 
@@ -73,11 +78,11 @@ export async function fetchProductById(productId: number) {
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data =
-    await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
+      await sql<Product>`SELECT p.id, p.pname, p.price, p.quantity, p.product_description,
     p.artisan_id, a.artisanfname, a.artisanlname, a.artisanemail, p.category_id, c.categoryname
     FROM products p
     JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id ORDER BY p.id;`;
-      // console.log(`fetch : ${data.rows}`)
+    // console.log(`fetch : ${data.rows}`)
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -163,20 +168,26 @@ export async function fetchReviewById(productId: number) {
   }
 }
 
-export async function fetchProductPages(query: string) {
+export async function fetchProductPages(query?: string) {
   noStore();
   try {
-    const count = await sql`SELECT COUNT(*)
-    FROM products p
-  
-    WHERE
-        p.pname ILIKE ${`%${query}%`}
-  `;
-
-    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
-    //console.log(totalPages);
-    //console.log(ITEMS_PER_PAGE);
-    return totalPages;
+    let count;
+    if (query) {
+      count = await sql`SELECT COUNT(*)
+      FROM products p
+      WHERE
+          p.pname ILIKE ${`%${query}%`}`;
+      const totalPages = Math.ceil(
+        Number(count.rows[0].count) / ITEMS_PER_PAGE_FILTERED
+      );
+      return totalPages;
+    } else {
+      count = await sql`SELECT COUNT(*) FROM products p`;
+      const totalPages = Math.ceil(
+        Number(count.rows[0].count) / ITEMS_PER_PAGE_ALL
+      );
+      return totalPages;
+    }
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of products.');
@@ -185,8 +196,7 @@ export async function fetchProductPages(query: string) {
 
 export async function fetchAllReviews() {
   try {
-    const data =
-      await sql<Reviews>`SELECT * FROM reviews`;
+    const data = await sql<Reviews>`SELECT * FROM reviews`;
     // console.log(data.rows);
     return data.rows;
   } catch (error) {

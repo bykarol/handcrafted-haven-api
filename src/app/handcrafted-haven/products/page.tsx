@@ -16,12 +16,13 @@ export default async function Page({
   const currentPage = Number(searchParams?.page) || 1;
 
   const totalPages = await fetchProductPages(query);
+  const totalGeneralPages = await fetchProductPages(); // Para la lista general de productos
 
   return (
     <main>
       {/* Search Results */}
       {query && (
-        <div className='className="mb-8 mt-4'>
+        <div className="mb-8 mt-4">
           <Suspense fallback={<ProductsSkeleton />}>
             <h2 className="text-xl font-bold">Search Results</h2>
             <ProductList query={query} currentPage={currentPage} />
@@ -42,8 +43,14 @@ export default async function Page({
 
       <div className="border-t-2 border-golden py-10">
         <Suspense fallback={<ProductsSkeleton />}>
-          <ProductList />
+          <ProductList currentPage={currentPage} />{' '}
+          {/* Pasa currentPage aquí */}
         </Suspense>
+
+        <div className="mt-5 flex w-full justify-center">
+          <Pagination totalPages={totalGeneralPages} />{' '}
+          {/* Agrega la paginación aquí */}
+        </div>
       </div>
     </main>
   );
