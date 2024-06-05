@@ -1,5 +1,4 @@
 import Nav from '@/app/ui/nav/nav';
-import Footer from '@/app/ui/footer/footer';
 import { Providers } from '@/app/handcrafted-haven/providers';
 import Footer from '../ui/footer/footer';
 
