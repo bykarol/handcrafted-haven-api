@@ -58,7 +58,7 @@ export default function Review({ productId, nextReview }: { productId: number, n
 
                             </fieldset>
 
-                            <button className="bg-golden rounded-md px-10 py-2 mt-10 hover:bg-[#F7BE38]/60" >
+                            <button className="bg-golden text-textButtons font-bold rounded-md px-10 py-2 mt-10 hover:bg-[#F7BE38]/60" >
                                 Save Review
                             </button>
 

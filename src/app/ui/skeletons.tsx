@@ -2,8 +2,8 @@
 export function CategorySkeleton() {
   return (
     <div className='flex flex-col items-center gap-2'>
-        <div className='flex flex-col justify-center rounded-full bg-gray w-64 h-64'></div>
-        <div className='h-7 w-40 rounded-md bg-gray' />
+        <div className='flex flex-col justify-center rounded-md bg-gray w-40 h-40'></div>
+        <div className='h-7 w-24 rounded-md bg-gray' />
     </div>
   );
 }
@@ -11,7 +11,7 @@ export function CategorySkeleton() {
 
 export function CategoriesSkeleton() {
     return (
-        <div className='animate-pulse flex flex-row flex-wrap justify-evenly gap-28'>
+        <div className='animate-pulse flex flex-row flex-wrap justify-evenly gap-5'>
             <CategorySkeleton/>
             <CategorySkeleton/>
             <CategorySkeleton/>
@@ -78,15 +78,28 @@ export function ArtisansSkeleton() {
     );
 }
 
-export function ProductsSkeleton(){
+
+export function ProductSkeleton(){
     return(
-        <div className='animate-pulse flex flex-row flex-wrap justify-evenly gap-28'>
-            <ProductDetailsSkeleton />
-            <ProductDetailsSkeleton />
-            <ProductDetailsSkeleton />
-            <ProductDetailsSkeleton />
-            <ProductDetailsSkeleton />
+        <div className='animate-pulse flex flex-col gap-1'>
+            <div className="w-36 h-5 bg-gray rounded-md"> </div>
+            <div className="w-32 h-40 bg-gray m-2"> </div>
+            <div className="w-20 h-3 bg-gray mx-2 rounded-md"> </div>
+            <div className="w-36 h-5 bg-gray rounded-md"> </div>
         </div>
 
     );
 }
+
+export function ProductsSkeleton(){
+    return(
+        <div className='animate-pulse flex flex-row flex-wrap justify-evenly gap-20'>
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+            <ProductSkeleton />
+        </div>
+
+    );
+ }

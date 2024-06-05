@@ -10,10 +10,11 @@ const config: Config = {
     colors: {
       'background': '#FFFFFF',    /* White */
       'mainTitles': '#8B4513',    /* Saddle Brown */
+      'textButtons': '#613210',   /* Saddle Brown */
       'paragraphs': '#1E1E1E',    /* Black */
       'golden': '#DAA520',        /* Goldenrod */
       'gray': '#C0C0C0',          /* Silver */
-      'lightGray': '#f3f4f6',      /* Light Silver */
+      'lightGray': '#f3f4f6',     /* Light Silver */
     },
     extend: {
       backgroundImage: {

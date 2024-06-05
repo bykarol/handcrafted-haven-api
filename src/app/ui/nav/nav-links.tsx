@@ -35,7 +35,7 @@ export default function NavLinks() {
       {links.map((link) => {
         return (
           <Link key={link.name} href={link.href}>
-            {<p className={clsx('text-lg p-2 m-1 rounded hover:bg-golden', { 'bg-golden': pathname === link.href })}>{link.name}</p>}
+            {<p className={clsx('text-lg p-2 m-1 rounded hover:bg-golden', { 'bg-golden text-textButtons font-bold': pathname === link.href })}>{link.name}</p>}
           </Link>
         );
       })}
