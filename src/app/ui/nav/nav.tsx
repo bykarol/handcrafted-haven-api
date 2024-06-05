@@ -1,7 +1,6 @@
 'use client';
 
 import NavLinks from '@/app/ui/nav/nav-links';
-import Image from 'next/image';
 import Search from '@/app/ui/search';
 import { primaryFont, secondaryFont } from '@/app/ui/fonts';
 import {
@@ -26,10 +25,6 @@ export default function Nav() {
       menuClases = ['hidden', 'md:flex'];
     }
     return menuClases.join(' ');
-  }
-  let profileImg = "/default-image.png";
-  if (session?.user?.image) {
-    profileImg = session.user.image;
   }
 
   function displayButton() {
@@ -77,11 +72,9 @@ export default function Nav() {
         {session?.user ? (
           <div className="Flex items-center">
             <p>{session.user.name}</p>
-            <Image
-              src={profileImg}
-              alt={`Photo of ${session.user.name}`}
-              width={40}
-              height={40}
+            <img
+              src={session.user.image ?? '/default-image.png'}
+              alt={session.user.name ?? 'User Image'}
               className="w-10 h-10 rounded-full center"
             />
 
