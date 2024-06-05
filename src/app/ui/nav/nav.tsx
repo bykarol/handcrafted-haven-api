@@ -7,11 +7,11 @@ import {
   PowerIcon,
   Bars3CenterLeftIcon,
   ArrowsPointingInIcon,
+  ShoppingCartIcon
 } from '@heroicons/react/24/outline';
 import { Suspense, useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
@@ -37,7 +37,7 @@ export default function Nav() {
   }
 
   return (
-    <nav className="text-mainTitles py-3 px-7 sm:p-6 md:flex md:justify-between md:items-center">
+    <nav className="text-mainTitles py-3 px-7 sm:p-6 flex flex-col gap-2 md:flex-row md:justify-between md:items-center md:gap-20">
       <div>
         <Link href='/handcrafted-haven'>
           <div className={`text-3xl text-center ${primaryFont.className}`}>
@@ -59,7 +59,7 @@ export default function Nav() {
         </button>
       </div>
 
-      <div>
+      <div className='flex-1'>
         <div className={getMenuClasses()}>
           <NavLinks />
         </div>
@@ -70,8 +70,12 @@ export default function Nav() {
           </Suspense>
         </div>
       </div>
-
-      <div className="flex flex-col md:items-end">
+      <Link href={`/handcrafted-haven/cart`}>
+        <div className='p-2 rounded hover:bg-golden'>
+          <ShoppingCartIcon className="h-6 w-6" />
+        </div>
+      </Link>
+      <div className="flex items-center md:items-end">
         {session?.user ? (
           <div className="Flex items-center">
             <p>{session.user.name}</p>
@@ -90,6 +94,7 @@ export default function Nav() {
             </div>
           </button>
         )}
+
       </div>
     </nav>
   );

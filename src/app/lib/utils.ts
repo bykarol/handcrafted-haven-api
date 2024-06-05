@@ -1,3 +1,5 @@
+import { Product } from "./definitions";
+
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
     style: 'currency',
@@ -63,9 +65,9 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 
 export const actualDate = () => {
   const today = new Date();
-  const month = String(today.getMonth()+1).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0');
   const year = today.getFullYear();
-  const date = String(today. getDate()).padStart(2, '0');
+  const date = String(today.getDate()).padStart(2, '0');
   const currentDate = `${year}-${month}-${date}`;
 
   return currentDate;
@@ -76,4 +78,14 @@ export const anonymousReviewers = () => {
   const names = ['Mystery Reviewer', 'Unknown Critic', 'Silent Evaluator', 'Incognito Reviewer', 'Secret Contributor', 'Mystery Shopper', 'Incognito Visitor', 'Nameless Reviewer', 'Stealthy Observer', 'Friendly Reviewer', 'Encouraging Evaluator', 'Positivity Contributor', 'Sunny Reviewer', 'Uplifting Evaluator', 'Bright Contributor', 'Sunshine Reviewer', 'Positive Presence', 'Hopeful Evaluator', 'Cheerful Critic', 'Joyful Assessor', 'Optimistic Observer', 'Radiant Reviewer', 'Happy Helper', 'Smiling Contributor', 'Radiant Rater', 'Optimism Source', 'Cheerful Contributor', 'Sunbeam Assessor', 'Joyful Rater', 'Kindness Critic', 'Encouraging Reviewer', 'Hopeful Helper', 'Bright Beacon', 'Sunlit Assessor'];
 
   return names[randomNumbers(names.length)[1]];
+}
+
+export const AddProductToCart = (product: Product) => {
+  const storedProducts: Product[] = JSON.parse(localStorage.getItem('cartProducts') || '[]');
+
+  const updatedProducts = [...storedProducts, product];
+
+  localStorage.setItem('cartProducts', JSON.stringify(updatedProducts));
+
+  return updatedProducts;
 }
