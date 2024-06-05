@@ -50,7 +50,7 @@ export default async function ProductCategoryList({ categoryId }: { categoryId: 
                             <ul className='py-2 text-lg' aria-labelledby='dropCategories'>
                                 {categories.map((category) => (
                                     <li className='' key={category.id}>
-                                        <a href={`/handcrafted-haven/category/${category.id}`} className='block px-4 py-2 hover:bg-mainTitles hover:text-background'>
+                                        <a href={`/handcrafted-haven/categories/${category.id}`} className='block px-4 py-2 hover:bg-mainTitles hover:text-background'>
                                             {category.categoryname}
                                         </a>
                                     </li>
