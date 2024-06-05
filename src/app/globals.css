@@ -3,15 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0; /* Black */
-  --background-start-rgb: 214, 219, 220; /* Zircon */
-  --background-end-rgb: 255, 255, 255; /* White */
+  --foreground-rgb: 0, 0, 0;
+  /* Black */
+  --background-start-rgb: 214, 219, 220;
+  /* Zircon */
+  --background-end-rgb: 255, 255, 255;
+  /* White */
 
-  --background: #ffffff; /* White          rbg(255, 255, 255)*/
-  --mainTitles: #8b4513; /* Saddle Brown   rbg(139, 69, 19) */
-  --paragraphs: #1e1e1e; /* Black          rbg(0, 0, 0) */
-  --golden: #daa520; /* Goldenrod      rbg(218, 165, 32) */
-  --gray: #c0c0c0; /* Silver         rbg(192, 192, 192) */
+  --background: #ffffff;
+  /* White          rbg(255, 255, 255)*/
+  --mainTitles: #8b4513;
+  /* Saddle Brown   rbg(139, 69, 19) */
+  --paragraphs: #1e1e1e;
+  /* Black          rbg(0, 0, 0) */
+  --golden: #daa520;
+  /* Goldenrod      rbg(218, 165, 32) */
+  --gray: #c0c0c0;
+  /* Silver         rbg(192, 192, 192) */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,11 +48,16 @@ main {
   color: var(--mainTitles);
 }
 
+#external-home {
+  background-color: var(--mainTitles);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
 /*
 .navegation {
   display: grid;

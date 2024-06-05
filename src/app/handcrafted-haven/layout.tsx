@@ -4,16 +4,14 @@ import Footer from '../ui/footer/footer';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <Providers>
-        <div>
-          <Nav />
-        </div>
-        <div>{children}</div>
-        <div>
-          <Footer />
-        </div>
-      </Providers>
-    </div>
+    <Providers>
+      <div>
+        <Nav />
+      </div>
+      <div>{children}</div>
+      <div>
+        <Footer />
+      </div>
+    </Providers>
   );
 }
