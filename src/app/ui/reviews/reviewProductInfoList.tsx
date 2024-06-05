@@ -6,10 +6,9 @@ export default async function ReviewProductInfoList({ productId }: { productId: 
     const product = await fetchProductById(productId)
     // console.log(product)
     return (
-        <>
+           <div className="flex flex-col gap-1 place-items-center">
+                < ProductCard product={product[0]}/>
+           </div>
 
-            < ProductCard product={product[0]} />
-
-        </>
     )
 }

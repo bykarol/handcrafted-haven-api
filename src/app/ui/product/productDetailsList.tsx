@@ -3,17 +3,18 @@ import ProductCard from "./productCard";
 import { fetchAllProducts, fetchReviewById  } from "@/app/lib/data";
 import { Product } from "@/app/lib/definitions"; 
 import { randomNumbers } from "@/app/lib/utils";
-import Link from "next/link";
 import ReviewList from "../reviews/reviewList";
+import Review from "../reviews/reviewForm";
 
 
 export default async function ProductDetailsList( {productId}: {productId: number} ) {
     
     const products = await fetchAllProducts();
-    const product = products[--productId];
     
     // Calculate total rating per product
     const reviews = await fetchReviewById(productId);
+    const arrayId = productId - 1;
+    const product = products[arrayId];
     let reviewTotal = 0;
     let totalRating = 0;
 
@@ -38,33 +39,17 @@ export default async function ProductDetailsList( {productId}: {productId: numbe
                 <p className="text-4xl text-center"> 
                     {product.pname}
                 </p>
+
                 {/* Product Details  */}
-
-                <div >
-                    <div>   
-                        < ProductDetailsCard product={product} totalRating={totalRating}/>
-                    </div>
-                </div>
-            </div>
-
-            <div className="text-end px-20 border-b-2 border-golden py-16">
-                <Link href="#" className="bg-[#F7BE38] hover:bg-[#F7BE38]/60 rounded-lg text-2xl px-4 text-center inline-flex items-center">
-                    <p>Add to the Cart</p>
-                </Link>
+                < ProductDetailsCard product={product} totalRating={totalRating}/>
             </div>
             
 
             {/* Display the reviews per product in product details */}
-            <div>
-                <h2 className="font-black text-2xl	">Reviews</h2>
+            <div className="border-t-2 border-golden">
+                <h2 className="font-black text-2xl	my-10">Reviews</h2>
                 <ReviewList productId = {productId}/>
-
-                <div className="flex mb-10">
-                    <Link href={`/handcrafted-haven/reviews/create/${++productId}`} className="bg-[#F7BE38] hover:bg-[#F7BE38]/60 rounded-lg text-2xl px-4 text-center inline-flex items-center">
-                        Add a review
-                    </Link>
-                </div>
-
+                <Review productId = {productId} />
             </div> 
 
             
@@ -77,8 +62,6 @@ export default async function ProductDetailsList( {productId}: {productId: numbe
                 </li>
                 ))}
             </ul>
-
-
         </>
     )
 }

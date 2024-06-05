@@ -59,3 +59,14 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+
+export const actualDate = () => {
+  const today = new Date();
+  const month = String(today.getMonth()+1).padStart(2, '0');
+  const year = today.getFullYear();
+  const date = String(today. getDate()).padStart(2, '0');
+  const currentDate = `${year}-${month}-${date}`;
+
+  return currentDate;
+}

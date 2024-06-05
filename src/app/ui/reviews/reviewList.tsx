@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default async function ReviewList({productId}: {productId: number}) {
     
-    const reviews = await fetchReviewById(++productId);
+    const reviews = await fetchReviewById(productId);
 
     return (
         <>
@@ -21,7 +21,7 @@ export default async function ReviewList({productId}: {productId: number}) {
 
                 <ul className='flex flex-wrap justify-evenly gap-20'>
                     {reviews.map((review) => (
-                        <li key={review.id}>
+                        <li className="flex flex-col gap-5 shadow-2xl p-10" key={review.id}>
                             < ReviewCard review = {review} />
                         </li>
                     ))}

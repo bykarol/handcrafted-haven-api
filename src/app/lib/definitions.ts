@@ -44,6 +44,7 @@ export type Reviews = {
   reviewdescription: string;
   reviewrating: string;
   reviewdate: string;
+  product_id?: number;
   customerid?: number;
   customerfname?: string;
   customerlname?: string;

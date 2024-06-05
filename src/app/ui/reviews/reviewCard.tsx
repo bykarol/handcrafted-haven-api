@@ -8,7 +8,7 @@ export async function ReviewCard({review} : {review: Reviews}) {
     return (
         <div>
             {review.reviewrating && (
-                <div className="flex flex-col gap-5 shadow-2xl p-10">
+                <div>
                     { review.buyer_id
                         ? <h2 className="font-bold"> {review.customerfname} {review.customerlname}</h2> 
                         : <h2 className="font-bold">Anonymous Reviewer</h2> }
