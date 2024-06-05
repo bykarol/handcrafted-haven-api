@@ -15,13 +15,13 @@ export default async function ProductList({
   if (query) {
     products = await fetchFilteredProducts(query, currentPage || 1);
   } else {
-    products = await fetchAllProducts();
+    products = await fetchAllProducts(currentPage || 1);
   }
   // console.log(products)
 
   return (
     <div>
-      <ul className='flex flex-wrap justify-evenly gap-20'>
+      <ul className="flex flex-wrap justify-evenly gap-20">
         {products.map((product) => (
           <li key={product.id}>
             <ProductCard product={product} />
