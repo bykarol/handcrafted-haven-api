@@ -70,3 +70,10 @@ export const actualDate = () => {
 
   return currentDate;
 }
+
+
+export const anonymousReviewers = () => {
+  const names = ['Mystery Reviewer', 'Unknown Critic', 'Silent Evaluator', 'Incognito Reviewer', 'Secret Contributor', 'Mystery Shopper', 'Incognito Visitor', 'Nameless Reviewer', 'Stealthy Observer', 'Friendly Reviewer', 'Encouraging Evaluator', 'Positivity Contributor', 'Sunny Reviewer', 'Uplifting Evaluator', 'Bright Contributor', 'Sunshine Reviewer', 'Positive Presence', 'Hopeful Evaluator', 'Cheerful Critic', 'Joyful Assessor', 'Optimistic Observer', 'Radiant Reviewer', 'Happy Helper', 'Smiling Contributor', 'Radiant Rater', 'Optimism Source', 'Cheerful Contributor', 'Sunbeam Assessor', 'Joyful Rater', 'Kindness Critic', 'Encouraging Reviewer', 'Hopeful Helper', 'Bright Beacon', 'Sunlit Assessor'];
+
+  return names[randomNumbers(names.length)[1]];
+}

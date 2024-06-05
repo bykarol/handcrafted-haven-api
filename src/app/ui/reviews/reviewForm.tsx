@@ -4,10 +4,11 @@ import { createReview } from "@/app/lib/actions";
 import { useRef } from "react";
 import { actualDate, formatDateToLocal } from "@/app/lib/utils";
 
-export default function Review({ productId }: { productId: number }) {
+export default function Review({ productId, nextReview }: { productId: number, nextReview: number }) {
 
     const formRef = useRef<HTMLFormElement> (null);
     const currentDate = actualDate();
+    // console.log({nextReview});
 
     return (
         <div className="flex items-center">
@@ -15,7 +16,7 @@ export default function Review({ productId }: { productId: number }) {
                 ref={formRef}
                 action={ async FormData => {
                     const review = await createReview(FormData);
-                    console.log({review});
+                    // console.log({review});
                     formRef.current?.reset()
                 }}>
 
@@ -48,6 +49,7 @@ export default function Review({ productId }: { productId: number }) {
                             <input type="radio" name="reviewrating" value="1" id="one"/>
                         </div>
 
+                        <input type="hidden" name='id' value={nextReview} />
                         <input type="hidden" name='product_id' value={productId} />
                         <input type="hidden" name="reviewdate" value={currentDate} />
 

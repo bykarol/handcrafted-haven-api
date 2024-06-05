@@ -154,7 +154,7 @@ export async function fetchArtisanById(artisanId: number) {
 export async function fetchReviewById(productId: number) {
   try {
     const data =
-      await sql<Reviews>`SELECT * FROM reviews r JOIN buyers b ON r.buyer_id = b.id WHERE ${productId} = product_id`;
+      await sql<Reviews>`SELECT * FROM reviews WHERE ${productId} = product_id`;
     // console.log(data.rows);
     return data.rows;
   } catch (error) {
@@ -180,5 +180,17 @@ export async function fetchProductPages(query: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of products.');
+  }
+}
+
+export async function fetchAllReviews() {
+  try {
+    const data =
+      await sql<Reviews>`SELECT * FROM reviews`;
+    // console.log(data.rows);
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch Review.');
   }
 }

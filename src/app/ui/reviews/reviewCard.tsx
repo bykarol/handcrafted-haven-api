@@ -1,5 +1,6 @@
 import { Reviews } from "@/app/lib/definitions";
 import Image from "next/image";
+import { anonymousReviewers } from "@/app/lib/utils";
 
 export async function ReviewCard({review} : {review: Reviews}) {
 
@@ -9,9 +10,10 @@ export async function ReviewCard({review} : {review: Reviews}) {
         <div>
             {review.reviewrating && (
                 <div>
-                    { review.buyer_id
+                    {/* { review.buyer_id
                         ? <h2 className="font-bold"> {review.customerfname} {review.customerlname}</h2> 
-                        : <h2 className="font-bold">Anonymous Reviewer</h2> }
+                        : <h2 className="font-bold"> Anonymous Reviewer </h2> } */}
+                    <h2 className="font-bold"> {anonymousReviewers()} </h2>
                     <h2 className="p-2"> {review.reviewdate} </h2>
                     <h2> {review.reviewdescription} </h2>
                     <Image
