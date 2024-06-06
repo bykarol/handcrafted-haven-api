@@ -4,7 +4,7 @@ import ProductCard from './productCard';
 import { Product } from '@/app/lib/definitions';
 
 export default async function ProductRecomendationsList() {
-  let currentPage = 1;
+  let currentPage = Math.floor(Math.random() * 6) + 1;
   const products = await fetchAllProducts(currentPage);
   const randomNumber = randomNumbers(products.length);
 
