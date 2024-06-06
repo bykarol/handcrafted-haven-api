@@ -149,13 +149,11 @@ export async function fetchArtisanById(artisanId: number) {
       await sql<Artisan>`SELECT * FROM artisans WHERE ${artisanId} = id`;
 
     return data.rows[0];
-
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch categories.');
   }
 }
-
 
 export async function fetchProductPages(query?: string) {
   noStore();
@@ -208,10 +206,8 @@ export async function fetchReviewByProduct(productId: number) {
 
 export async function fetchReviewById(id: number) {
   try {
-    
-    const data =
-      await sql<Reviews>`SELECT * FROM reviews WHERE ${id} = id`;
-      // console.log('Fetching Reviews', data.rows[0]);
+    const data = await sql<Reviews>`SELECT * FROM reviews WHERE ${id} = id`;
+    // console.log('Fetching Reviews', data.rows[0]);
     return data.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
