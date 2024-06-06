@@ -5,37 +5,42 @@ import Link from 'next/link';
 import { updateBio} from '@/app/lib/actions';
 
 
-export default function UpdateBioForm({artisans}: { artisans: Artisan}) {
+export default function UpdateBioForm({artisan}: { artisan: Artisan}) { 
+
+  
 
   return (<form action={ async FormData =>{await updateBio(FormData)}}>
 
-    <div className='p-5 my-5'>
+  <div className='flex flex-col gap-5 p-5 my-5'>
+    <div >
       <label htmlFor="fname" className="font-semibold m-2">First Name </label>
-      <input type="text" id="fname" name="artisanfname" defaultValue={artisans.artisanfname} className="w-full border border-gray rounded-md p-2"  required/>
+      <input type="text" id="fname" name="artisanfname" defaultValue={artisan.artisanfname} className="w-full border border-gray rounded-md p-2"  required/>
     </div>
 
-    <div className='p-5 my-5'>
+    <div >
       <label htmlFor="lname" className="font-semibold m-2">Last Name </label>
-      <input type="text" id="lname" name="artisanlname" defaultValue={artisans.artisanlname} className=" w-full border border-gray rounded-md p-2"  required/>
+      <input type="text" id="lname" name="artisanlname" defaultValue={artisan.artisanlname} className=" w-full border border-gray rounded-md p-2"  required/>
     </div>
 
-    <div className='p-5 my-5'>
+    <div >
       <label htmlFor="email" className="font-semibold m-2">Email </label>
-      <input type="email" id="email" name="artisanemail" defaultValue={artisans.artisanemail} className=" w-full border border-gray rounded-md p-2"  required/>
+      <input type="email" id="email" name="artisanemail" defaultValue={artisan.artisanemail} className=" w-full border border-gray rounded-md p-2"  required/>
     </div>
 
-    <div className='p-5 my-5'>
+    <div >
       <label htmlFor="phone" className="font-semibold m-2">Phone Number </label>
-      <input type="tel" id="phone" name="artisanphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" defaultValue={artisans.artisanphone} className=" w-full border border-gray rounded-md p-2" required/>
+      <input type="tel" id="phone" name="artisanphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" defaultValue={artisan.artisanphone} className=" w-full border border-gray rounded-md p-2" required/>
     </div>
 
-    <div className='p-5 my-5'>
+    <div >
       <label htmlFor="bio" className="font-semibold m-2">Bio </label>
-      <textarea id="bio" name="artisaninfo" rows={10} defaultValue={artisans.artisaninfo}  className="w-full border border-gray rounded-md px-2 py-3 mb-10 block"  required 
+      <textarea id="bio" name="artisaninfo" rows={10} defaultValue={artisan.artisaninfo}  className="w-full border border-gray rounded-md px-2 py-3 mb-10 block"  required 
     />
     </div>
+  </div>
+    
 
-    <input type="hidden" name='artisanId' value={artisans.id}/>
+    <input type="hidden" name='artisanId' value={artisan.id}/>
 
 
     {/* Buttons at the end of the form */}
