@@ -9,10 +9,10 @@ export default function Footer() {
                 <h2 className="text-center text-3xl pb-3">About Handcrafted Haven</h2>
                 <p className="text-center text-lg">Welcome to Handcrafted Haven, where creativity meets craftsmanship! We are passionate artisans dedicated to curating and showcasing the finest handcrafted goods from around the world. At Handcrafted Haven, we believe that every piece tells a story. Each creation is infused with the love, dedication, and unique vision of the talented artisans behind it. From intricately designed jewelry to exquisitely crafted home decor, our platform is a celebration of artisanal mastery and creativity.</p>
 
-                <div className="text-right text-lg my-5 pr-3">
+                <div className="text-right text-lg my-5 pr-3 flex justify-end gap-4">
                     {/* <FooterLinks /> */}
-                    <span className="underline mx-3">Want to see the code? </span>
-                    <a className="bg-golden text-textButtons font-bold rounded-md px-10 py-2 mt-10 hover:bg-[#F7BE38]/60" href="https://github.com/bykarol/handcrafted-haven-api" target='_blank'>GitHub Repo</a>
+                    <span className="underline">Want to see the code? </span>
+                    <a className="bg-golden text-textButtons font-bold rounded-md px-10 py-2 hover:bg-[#F7BE38]/60 pr-3 pl-4 max-w-36 text-center justify-self-end" href="https://github.com/bykarol/handcrafted-haven-api" target='_blank'>GitHub Repo</a>
                 </div>
             </div>
             <div className="pt-4 pr-4">
