@@ -7,29 +7,35 @@ import { z } from "zod";
 
 
 const ReviewSchema = z.object({
-  id_s: z.string(),
-  product_id_s: z.string(),
+  id: z.coerce.number(),
+  product_id: z.coerce.number(),
   reviewdescription: z.string(),
   reviewrating: z.string(),
   reviewdate: z.string(),
 })
 
-const CreateReview = ReviewSchema;
+const CreateReview = ReviewSchema.omit({ });
 // export const createReview = async (formData: FormData, product_id: number) => {
 export async function createReview(formData: FormData) {
 
-  // console.log({formData});
-  const { id_s, product_id_s, reviewdescription, reviewrating, reviewdate } = CreateReview.parse({
-    id_s: formData.get('id'),
-    product_id_s: formData.get('product_id'),
+
+  const validatedFields = CreateReview.safeParse({
+    id: formData.get('id'),
+    product_id: formData.get('product_id'),
     reviewdescription: formData.get('reviewdescription'),
     reviewrating: formData.get('reviewrating'),
     reviewdate: formData.get('reviewdate'),
-
   });
 
-  const product_id = parseInt(product_id_s);
-  const id = parseInt(id_s);
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Invoice.',
+    };
+  }
+
+  const { id, product_id, reviewdescription, reviewrating, reviewdate } = validatedFields.data;
+
   // console.log({id, product_id, reviewdescription, reviewrating, reviewdate});
 
 
@@ -69,17 +75,15 @@ const FormSchema = z.object({
 
 // Update Bio action for Artisan Form 
 
-export async function updateBio(
-  formData: FormData
-) {
+export async function updateBio(formData: FormData) {
 
     const validatedFields = UpdateBio.safeParse({
-    artisanId: formData.get('artisanId'),
-    artisanfname: formData.get('artisanfname'),
-    artisanlname: formData.get('artisanlname'),
-    artisanemail: formData.get('artisanemail'),
-    artisanphone: formData.get('artisanphone'),
-    artisaninfo: formData.get('artisaninfo')
+      artisanId: formData.get('artisanId'),
+      artisanfname: formData.get('artisanfname'),
+      artisanlname: formData.get('artisanlname'),
+      artisanemail: formData.get('artisanemail'),
+      artisanphone: formData.get('artisanphone'),
+      artisaninfo: formData.get('artisaninfo')
   });
 
   //  If form validation fails, return errors early. Otherwise, continue.
