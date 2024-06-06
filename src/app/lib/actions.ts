@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from "zod";
 
+
 const ReviewSchema = z.object({
   id_s: z.string(),
   product_id_s: z.string(),
@@ -49,33 +50,67 @@ export async function createReview(formData: FormData) {
 }
 
 
+
+
+//// ARTISANS SERVER ACTION ///////
+//////////////////////////////////
+
+const FormSchema = z.object({
+    artisanId: z.coerce.number(),
+    artisanfname: z.string(),
+    artisanlname: z.string(),
+    artisanemail: z.string(),
+    artisanphone: z.string(),
+    artisaninfo: z.string()
+  });
+   
+  // Use Zod to update the expected types
+  const UpdateBio = FormSchema.omit({});
+
 // Update Bio action for Artisan Form 
 
-export async function updateBioWithId(
-  // id: string,
-  // prevState: State,
-  // artisans: Artisan,
+export async function updateBio(
   formData: FormData
 ) {
 
-  const UpdateBio = ({
-    artisanId: formData.get('id'),
+    const validatedFields = UpdateBio.safeParse({
+    artisanId: formData.get('artisanId'),
     artisanfname: formData.get('artisanfname'),
     artisanlname: formData.get('artisanlname'),
     artisanemail: formData.get('artisanemail'),
     artisanphone: formData.get('artisanphone'),
     artisaninfo: formData.get('artisaninfo')
   });
+
   //  If form validation fails, return errors early. Otherwise, continue.
-  if (!UpdateBio) {
+  if (!validatedFields.success) {
     return {
+      errors: validatedFields.error.flatten().fieldErrors,
       message: 'Missing Fields. Failed to Update Bio.',
     };
   }
-  // console.log(UpdateBio);
-  //   Prepare data for insertion into the database
-  // pero 
 
-  revalidatePath('/handcrafted-haven/artisans');
-  redirect('/handcrafted-haven/artisans');
+    // Prepare data for insertion into the database
+  
+      const {artisanId, artisanfname, artisanlname, artisanemail, artisanphone,  artisaninfo} = validatedFields.data;
+
+      // Insert data into the database
+    try {
+      await sql`
+        UPDATE artisans
+        SET id = ${artisanId}, 
+        artisanfname = ${artisanfname},
+        artisanlname = ${artisanlname}, 
+        artisanemail = ${artisanemail}, 
+        artisanphone = ${artisanphone}, 
+        artisaninfo = ${artisaninfo}
+        WHERE id = ${artisanId}
+      `;
+    } catch (error) {
+      return { message: 'Database Error: Failed to Update Artisan Bio.' };
+    }
+   
+
+  revalidatePath(`/handcrafted-haven/artisans/${artisanId}`);
+  redirect(`/handcrafted-haven/artisans/${artisanId}`);
 }
