@@ -20,13 +20,19 @@ return (
       breadcrumbs={[
         { label: 'Artisan', href: '/handcrafted-haven/artisans' },
         {
-          label: 'Update Bio',
+          label: 'Update ',
           href: `/handcrafted-haven/artisans/${id}/edit`,
           active: true,
         },
       ]}
     />
-    <UpdateBioForm artisans={artisan[0]}/>
+
+      <div className='max-w-5xl m-auto md:shadow-2xl md:p-5'>
+        <UpdateBioForm artisans={artisan[0]}/>
+      </div>
+    
+
+    
   </main>
 );
 }
