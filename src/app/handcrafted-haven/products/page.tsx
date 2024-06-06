@@ -43,13 +43,11 @@ export default async function Page({
 
       <div className="border-t-2 border-golden py-10">
         <Suspense fallback={<ProductsSkeleton />}>
-          <ProductList currentPage={currentPage} />{' '}
-          {/* Pasa currentPage aquí */}
+          <ProductList currentPage={currentPage} />
         </Suspense>
 
         <div className="mt-5 flex w-full justify-center">
-          <Pagination totalPages={totalGeneralPages} />{' '}
-          {/* Agrega la paginación aquí */}
+          <Pagination totalPages={totalGeneralPages} />
         </div>
       </div>
     </main>
