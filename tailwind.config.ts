@@ -15,6 +15,7 @@ const config: Config = {
       'golden': '#DAA520',        /* Goldenrod */
       'gray': '#C0C0C0',          /* Silver */
       'lightGray': '#f3f4f6',     /* Light Silver */
+      'red': '#dc2626',           /* Red */
     },
     extend: {
       backgroundImage: {

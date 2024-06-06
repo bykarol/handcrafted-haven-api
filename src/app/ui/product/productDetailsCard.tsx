@@ -63,7 +63,7 @@ export default function ProductDetailsCard({ product, totalRating }: { product: 
                     <p className="text-2xl font-semibold">
                         Price: ${product.price}
                     </p>
-                    <button onClick={handleClick} className="bg-golden rounded-md px-10 py-2 hover:bg-[#F7BE38]/60">Add to Cart</button>
+                    <button onClick={handleClick} className="bg-golden text-textButtons font-bold rounded-md px-10 py-2 hover:bg-[#F7BE38]/60">Add to Cart</button>
                 </div>
             </div>
 

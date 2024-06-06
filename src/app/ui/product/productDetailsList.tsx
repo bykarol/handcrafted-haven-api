@@ -1,6 +1,6 @@
 import ProductDetailsCard from './productDetailsCard';
 import ProductCard from './productCard';
-import { fetchAllProducts, fetchReviewById } from '@/app/lib/data';
+import { fetchAllProducts, fetchReviewByProduct } from '@/app/lib/data';
 import { Product } from '@/app/lib/definitions';
 import { randomNumbers } from '@/app/lib/utils';
 import ReviewList from '../reviews/reviewList';
@@ -14,15 +14,15 @@ export default async function ProductDetailsList({
   productId: number;
 }) {
   const arrayReviews = await fetchAllReviews();
-  const nextReview = arrayReviews.length + 1;
-  // console.log(nextReview.length);
-  // console.log(arrayReviews)
+  const length = arrayReviews.length - 1;
+  const nextReview = arrayReviews[length].id + 1;
+
 
   let currentPage = 1;
-  const products = await fetchAllProducts(currentPage || 1);
+  const products = await fetchAllProducts(currentPage || 1); 
 
   // Calculate total rating per product
-  const reviews = await fetchReviewById(productId);
+  const reviews = await fetchReviewByProduct(productId);
   const arrayId = productId - 1;
   const product = products[arrayId];
   let reviewTotal = 0;

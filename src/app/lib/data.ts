@@ -83,7 +83,7 @@ export async function fetchProductById(productId: number) {
     FROM products p
     JOIN artisans a ON p.artisan_id = a.id JOIN categories c ON p.category_id = c.id WHERE ${productId} = p.id ORDER BY p.id;`;
     // console.log(`fetch : ${data.rows}`)
-    return data.rows;
+    return data.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch products.');
@@ -123,7 +123,7 @@ export async function fetchCategoryById(categoryId: number) {
   try {
     const data =
       await sql<Category>`SELECT * FROM categories WHERE id = ${categoryId}`;
-    return data.rows;
+    return data.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch categories.');
@@ -132,9 +132,7 @@ export async function fetchCategoryById(categoryId: number) {
 
 export async function fetchAllArtisan() {
   try {
-    console.log('Fetching Artisan data...');
-    // /////////
-    // /////////
+    //console.log('Fetching Artisan data...');
     //await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const data = await sql<Artisan>`SELECT * FROM artisans`;
@@ -149,24 +147,15 @@ export async function fetchArtisanById(artisanId: number) {
   try {
     const data =
       await sql<Artisan>`SELECT * FROM artisans WHERE ${artisanId} = id`;
-    return data.rows;
+
+    return data.rows[0];
+
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch categories.');
   }
 }
 
-export async function fetchReviewById(productId: number) {
-  try {
-    const data =
-      await sql<Reviews>`SELECT * FROM reviews WHERE ${productId} = product_id`;
-    // console.log(data.rows);
-    return data.rows;
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch Review.');
-  }
-}
 
 export async function fetchProductPages(query?: string) {
   noStore();
@@ -196,9 +185,34 @@ export async function fetchProductPages(query?: string) {
 
 export async function fetchAllReviews() {
   try {
-    const data = await sql<Reviews>`SELECT * FROM reviews`;
+    const data = await sql<Reviews>`SELECT * FROM reviews ORDER BY id`;
     // console.log(data.rows);
     return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch Review.');
+  }
+}
+
+export async function fetchReviewByProduct(productId: number) {
+  try {
+    const data =
+      await sql<Reviews>`SELECT * FROM reviews WHERE ${productId} = product_id`;
+    // console.log(data.rows);
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch Review.');
+  }
+}
+
+export async function fetchReviewById(id: number) {
+  try {
+    
+    const data =
+      await sql<Reviews>`SELECT * FROM reviews WHERE ${id} = id`;
+      // console.log('Fetching Reviews', data.rows[0]);
+    return data.rows[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch Review.');

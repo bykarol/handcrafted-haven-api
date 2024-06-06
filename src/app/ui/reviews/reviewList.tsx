@@ -1,12 +1,10 @@
-import { fetchReviewById } from "@/app/lib/data";
+import { fetchReviewByProduct } from "@/app/lib/data";
 import { ReviewCard } from "./reviewCard";
+import Link from "next/link";
 
+export default async function ReviewList({ productId }: { productId: number }) { 
 
-
-export default async function ReviewList({ productId }: { productId: number }) {
-
-    const reviews = await fetchReviewById(productId);
-    // console.log({reviews, productId});
+    const reviews = await fetchReviewByProduct(productId);
 
     return (
         <>
@@ -21,11 +19,12 @@ export default async function ReviewList({ productId }: { productId: number }) {
                 <ul className='flex flex-wrap justify-evenly gap-20'>
                     {reviews.map((review) => (
                         <li className="flex flex-col gap-5 shadow-2xl p-10 min-w-full" key={review.id}>
-                            < ReviewCard review={review} />
+                            <div>
+                                < ReviewCard review={review} />
+                            </div>
                         </li>
                     ))}
                 </ul>
-
             </div>
         </>
     )

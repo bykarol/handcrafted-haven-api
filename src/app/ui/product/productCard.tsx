@@ -1,12 +1,12 @@
 import { Product } from "@/app/lib/definitions";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchReviewById } from "@/app/lib/data";
+import { fetchReviewByProduct } from "@/app/lib/data";
 
 export default async function ProductCard({ product }: { product: Product }) {
 
   // Calculate total rating per product
-  const reviews = await fetchReviewById(product.id);
+  const reviews = await fetchReviewByProduct(product.id);
   let reviewTotal = 0;
   let totalRating = 0;
 

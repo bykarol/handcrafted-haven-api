@@ -6,6 +6,11 @@ import { redirect } from 'next/navigation';
 import { z } from "zod";
 
 
+
+// //////////////////
+//      REVIEWS
+// //////////////////
+
 const ReviewSchema = z.object({
   id: z.coerce.number(),
   product_id: z.coerce.number(),
@@ -14,8 +19,9 @@ const ReviewSchema = z.object({
   reviewdate: z.string(),
 })
 
+
 const CreateReview = ReviewSchema.omit({ });
-// export const createReview = async (formData: FormData, product_id: number) => {
+
 export async function createReview(formData: FormData) {
 
 
@@ -36,20 +42,57 @@ export async function createReview(formData: FormData) {
 
   const { id, product_id, reviewdescription, reviewrating, reviewdate } = validatedFields.data;
 
-  // console.log({id, product_id, reviewdescription, reviewrating, reviewdate});
-
-
   // // Insert data into the database
   try {
     await sql`
       INSERT INTO reviews (id, product_id, reviewdescription, reviewrating, reviewdate)
       VALUES (${id}, ${product_id}, ${reviewdescription}, ${reviewrating}, ${reviewdate})`;
   } catch (error) {
-    // If a database error occurs, return a more specific error.
-    // return {
-    console.error('Database Error: Failed to Create Invoice.', error);
-    // };
+    return { message: 'Database Error: Failed to Create Review.' };
   }
+
+  revalidatePath(`/handcrafted-haven/products/${product_id}`);
+  redirect(`/handcrafted-haven/products/${product_id}`);
+}
+
+
+const UpdateReview = ReviewSchema.omit({ });
+
+export async function updateReview(formData: FormData) {
+
+  const validatedFields = UpdateReview.safeParse({
+    id: formData.get('id'),
+    product_id: formData.get('product_id'),
+    reviewdescription: formData.get('reviewdescription'),
+    reviewrating: formData.get('reviewrating'),
+    reviewdate: formData.get('reviewdate'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Invoice.',
+    };
+  }
+
+  
+  const { id, product_id, reviewdescription, reviewrating, reviewdate } = validatedFields.data;
+
+  // // // Update data into the database
+  try {
+    await sql`
+      UPDATE reviews 
+      SET id = ${id}, 
+          product_id = ${product_id}, 
+          reviewdescription = ${reviewdescription}, 
+          reviewrating = ${reviewrating}, 
+          reviewdate = ${reviewdate}
+      WHERE id = ${id}`
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Review.' };
+  }
+
+  console.log({id, product_id, reviewdescription, reviewrating, reviewdate })
 
   revalidatePath(`/handcrafted-haven/products/${product_id}`);
   redirect(`/handcrafted-haven/products/${product_id}`);
@@ -58,8 +101,25 @@ export async function createReview(formData: FormData) {
 
 
 
-//// ARTISANS SERVER ACTION ///////
-//////////////////////////////////
+export async function deleteReview(id: number) {
+
+  console.log({id});
+  try {
+    await sql`DELETE FROM reviews WHERE id = ${id}`;
+    revalidatePath('/dashboard/invoices');
+    return { message: 'Deleted Review.' };
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Review.' };
+  }
+}
+
+
+
+
+
+// /////////////////////////
+//  ARTISANS SERVER ACTION 
+// /////////////////////////
 
 const FormSchema = z.object({
     artisanId: z.coerce.number(),
