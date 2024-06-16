@@ -9,7 +9,7 @@ Handcrafted Haven is an innovative web application that aims to provide a platfo
 Users can browse through the catalog, filter by category, price range, or other relevant criteria.
 - Reviews and Ratings: Any user can leave a rating for the product and a written review.
 
-### Software Demo Video (here)
+### [Software Demo Video](https://youtu.be/VrfAwiuPq-Y?si=hpRmXZaiZSTKoQBc)
 
 ## Development Environment
 
